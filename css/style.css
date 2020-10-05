@@ -4,19 +4,102 @@
 
 
 body {
-  background-color: darkslateblue;
+  background-color: darkslategray;
   text-align: center;
   color: whitesmoke;
-  font-family
+  font-family: 'Courier New', Courier, monospace;
 }
 
-section{
+main{
   display: flex;
   justify-content: space-evenly;
+}
+
+.cup {
+  background-color: red;
+  border-radius: 50%;
+  border: 2px solid bisque;
+  height: 40px;
+  width: 40px;
+}
+
+.watercup {
+  background-color: cyan;
+  border-radius: 50%;
+  border: 2px solid bisque;
+  height: 40px;
+  width: 40px;
+  margin: 0px 30px;
+}
+
+section.CPUcups {
+  height: 160px; 
+  width: 160px;
+  /* background-color: blue; */
+}
+
+section.cpu-water-placement{
+  display: flex;
+  align-self: flex-end;
+  position: relative;
+    bottom: 45px;
+}
+
+section.player-water-placement {
+  display: flex;
+  align-self: flex-start;
+  position: relative;
+  top: 45px;
+}
+
+section.playercups {
+  /* display:flex;
+  justify-content: center; */
+  height: 160px; 
+  width: 160px;
+  /* background-color: chartreuse; */
 }
 
 .table {
   height: 500px;
   width: 300px;
   background-color: burlywood;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.CPU-r2 {
+  display: flex;
+  justify-content: center;
+}
+.CPU-r3 {
+  display: flex;
+  justify-content: center;
+}
+.CPU-r4 {
+  display: flex;
+  justify-content: center;
+}
+.CPU-r1 {
+  display: flex;
+  justify-content: center;
+}
+
+.player-r1 {
+  display: flex;
+  justify-content: center;
+}
+.player-r2 {
+  display: flex;
+  justify-content: center;
+}
+.player-r3 {
+  display: flex;
+  justify-content: center;
+}
+.player-r4 {
+  display: flex;
+  justify-content: center;
 }
