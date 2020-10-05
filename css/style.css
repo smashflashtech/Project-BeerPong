@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  background-color: darkslateblue;
+  text-align: center;
+  color: whitesmoke;
+  font-family
+}
+
+section{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.table {
+  height: 500px;
+  width: 300px;
+  background-color: burlywood;
+}
