@@ -32,6 +32,32 @@ main{
   margin: 0px 30px;
 }
 
+.cpuBall {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  margin: 6px 0px 0px 1px;
+}
+
+.playerBall {
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  margin: 10px 5px 0px 0px;
+}
+
+.yourTurn {
+  position: relative;
+  left: 45px;
+  font-size: 12px;
+  font-weight: bold;
+  color: brown;
+}
+
 section.CPUcups {
   height: 160px; 
   width: 160px;
