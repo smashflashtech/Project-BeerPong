@@ -19,8 +19,8 @@
 
 
 const beerPong = {
-  playerHits: 0,      //CREATE HIT COUNTERS:
-  cpuHits: 0,
+  pHits: 0,      //CREATE HIT COUNTERS:
+  cHits: 0,
   turnCounter: 0,
   whosTurn: function () {                               //CREATE A FUNCTION: There needes to be a function that decides who's turn it is
     if (this.turnCounter %2 !== 0) {                    //UNFINISHED: within the who's turn i should have a conditional that checks the hit score to determine whether or not to continue running
@@ -41,10 +41,12 @@ const beerPong = {
       //the player will never select anything that is false..because i should have turned that event listener off, so what i should do is have the computer evaluation of value in the computers turn function
       target.setAttribute("style", "opacity:0") //Make the cup disappear
       target.setAttribute("value", "not-playable")   //change its value to false
+      let updateHitCounters = `${lowerCaseLetter}Hits` //template string would not work with this. so i stored the string in a variable
+      this.updateHitCounters = this.updateHitCounters++ //adds one to the hits counter for respective player/cpu//i wonder if this is redundant and i could just write this.`${lowerCaseLetter}Hits`++
       this.turnCounter = this.turnCounter++  //adds one to the turnCounter
       whosTurn()
     } else if (hitOrNoHit >= .67 && hitOrNoHit <= 1 ) {
-          window.alert("OoOo, it bounced off your target and sank into another cup!!")  
+          window.alert("OoOo, it bounced off the target and sank into another cup!!")  
           const options = [`${lowerCaseLetter}1`, `${lowerCaseLetter}2`, `${lowerCaseLetter}3`, `${lowerCaseLetter}4`, `${lowerCaseLetter}5`, `${lowerCaseLetter}6`, `${lowerCaseLetter}7`, `${lowerCaseLetter}8`, `${lowerCaseLetter}9`, `${lowerCaseLetter}10`]   //BOUNCES OFF CUP AND LANDS IN ANOTHER CUP, lets take out the last cup that comes up playable
           for (i = 0 ; i < options.length; i++){
           let checkValue = document.getElementById(options[i]).getAttribute("value")        
@@ -56,6 +58,8 @@ const beerPong = {
           let grabOtherCupHit = document.getElementById(targetOtherCup)   //I need to grab this element by the id stored in targetOtherCup
           grabOtherCupHit.setAttribute("value", "non-playable")
           grabOtherCupHit.setAttribute("style", "opacity:0")
+          let updateHitCounters = `${lowerCaseLetter}Hits` //template string would not work with this. so i stored the string in a variable
+          this.updateHitCounters = this.updateHitCounters++ //adds one to the respectivve player hit counter
           this.turnCounter = this.turnCounter++                       //add one to the turncounter
           whosTurn()  
       }
