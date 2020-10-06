@@ -15,6 +15,18 @@ main{
   justify-content: space-evenly;
 }
 
+.cpuSide {
+  margin: 0px 0px -15px 0px;
+  color: rgb(63, 34, 0);
+  font-weight: bold;
+}
+
+.playerSide {
+  margin: -15px 0px 0px 0px;
+  color: rgb(63, 34, 0);
+  font-weight: bold;
+}
+
 .cup {
   background-color: red;
   border-radius: 50%;

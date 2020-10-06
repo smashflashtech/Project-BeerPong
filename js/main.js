@@ -16,13 +16,146 @@
 
 //START HERE//
 
-//CREATE HIT COUNTERS:
-let playerHits = 0
-let cpuHits = 0
-//CREATE A FUNCTION: There needes to be a function that decides who's turn it is
 
-//COMPUTERS TURN - when its computers turn toggle opacity of ball in water cup to 1
-// - ** cpuHitorNoHit() - First I need to determine if the cup is: 
+
+const beerPong = {
+  playerHits: 0,      //CREATE HIT COUNTERS:
+  cpuHits: 0,
+  turnCounter: 0,
+  whosTurn: function () {                               //CREATE A FUNCTION: There needes to be a function that decides who's turn it is
+    if (this.turnCounter %2 !== 0) {                    //UNFINISHED: within the who's turn i should have a conditional that checks the hit score to determine whether or not to continue running
+      playersTurn()
+    } else {
+      cpusTurn()
+    }
+  },
+  ballDoesWhat: function (lowerCaseLetter, numberOfTargetCup) {
+    let hitOrNoHit = Math.random()
+    if (hitOrNoHit <=.33) {
+      window.alert("Miss!")                                       // MISS
+      this.turnCounter = this.turnCounter++                       //add one to the turncounter
+      whosTurn()                                                  //nothing else happens, move on to the next turn
+    } else if (hitOrNoHit >= .34 && hitOrNoHit <= .66) {
+      window.alert("Check out that laser shot! It's a hit!")
+      let target = document.getElementById(`${lowerCaseLetter}${numberOfTargetCup}`)                       //HIT numberOfTargetCup - it should grab the element with id = "lowerCaseLetter(numberOfTargetCup)"
+      //the player will never select anything that is false..because i should have turned that event listener off, so what i should do is have the computer evaluation of value in the computers turn function
+      target.setAttribute("style", "opacity:0") //Make the cup disappear
+      target.setAttribute("value", "not-playable")   //change its value to false
+      this.turnCounter = this.turnCounter++  //adds one to the turnCounter
+      whosTurn()
+    } else if (hitOrNoHit >= .67 && hitOrNoHit <= 1 ) {
+          window.alert("OoOo, it bounced off your target and sank into another cup!!")  
+          const options = [`${lowerCaseLetter}1`, `${lowerCaseLetter}2`, `${lowerCaseLetter}3`, `${lowerCaseLetter}4`, `${lowerCaseLetter}5`, `${lowerCaseLetter}6`, `${lowerCaseLetter}7`, `${lowerCaseLetter}8`, `${lowerCaseLetter}9`, `${lowerCaseLetter}10`]   //BOUNCES OFF CUP AND LANDS IN ANOTHER CUP, lets take out the last cup that comes up playable
+          for (i = 0 ; i < options.length; i++){
+          let checkValue = document.getElementById(options[i]).getAttribute("value")        
+//        console.log(checkValue)// this works
+//        console.log(options[i])// this works
+          if(checkValue === "playable") {                             
+          let targetOtherCup = options[i] //this is going to store the ID of late element iterated through that was "playable"
+//        console.log("this is the value:", targetOtherCup)this works
+          let grabOtherCupHit = document.getElementById(targetOtherCup)   //I need to grab this element by the id stored in targetOtherCup
+          grabOtherCupHit.setAttribute("value", "non-playable")
+          grabOtherCupHit.setAttribute("style", "opacity:0")
+          this.turnCounter = this.turnCounter++                       //add one to the turncounter
+          whosTurn()  
+      }
+    }
+  },
+  playersTurn: function () { //UNFINISHED FUNCTION
+    let changeCpuBallOpacity = document.getElementById("cBall") // Dims computer Ball
+    changeCpuBallOpacity.setAttribute("style", "opacity:0")
+    let changePlayerBallOpacity = document.getElementById("pBall") //Undims player ball/your turn
+        changePlayerBallOpacity.setAttribute("style", "opacity:1")
+        //add code for hover effect??
+        //console.log(changeBallOpacity) //this worked
+        //let playersChosenTarget = code to grab input from the onclick
+        this.ballDoesWhat("p", playersChosenTarget)
+  },
+  cpusTurn: function () {
+    let changePlayerBallOpacity = document.getElementById("pBall") //Dims player ball/your turn
+        changePlayerBallOpacity.setAttribute("style", "opacity:0")
+    let changeCpuBallOpacity = document.getElementById("cBall") // undims computer ball
+        changeCpuBallOpacity.setAttribute("style", "opacity:1")
+        //console.log(changeBallOpacity) //this worked
+        const cpuOptions = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10"] //lets just gerry ring this
+    for (let i = 0; i < cpuOptions.length; i++) { //shuffle the array //this loops through the array and changes the value of each element index at least once. 
+      let j = Math.floor(Math.random() * cpuOptions.length);   //this creates a random ratio between 0-1 and multiples that ratio by the array length, then rounds that product down--representing a value that is within the index range
+      let temp = cpuOptions[i];                                //this is a temporary variable that contains the the value that was in the index that the current iterator is accessing
+      cpuOptions[i] = cpuOptions[j];                            //this changes the current index that the iterator has access to the value that occupied index j
+      cpuOptions[j] = temp;   
+//      console.log(cpuOptions)//this works
+    }
+    for (let k = 0; k < cpuOptions.length; k++){               //this is going to loop through all the items in the array and evalure the value
+          //      console.log(computerTarget)//this works
+          let checkValue = document.getElementById(cpuOptions[k]).getAttribute("value")         //check if this value is still in play; i need a while loop to run until it returns true
+//                console.log(checkValue)// this works
+//                console.log(cpuOptions[k]) // this works
+          if(checkValue === "playable") {                             ///got help because it wasnt working; changed the boolean true to the string true. facepalm
+            let cpusChosenTarget = cpuOptions[k]                        //this declares the variable computer target as a variable and stores the most recent ID that evaluated true in this variable; 
+//            console.log("this is it: ", computerTarget)//this work
+          }
+      }
+        this.ballDoesWhat("c", cpusChosenTarget)
+  },
+} //!!!!! dont c omment out this one !!!!! this is the end of the object container
+
+//-----------------------------------------
+// console.log(beerPong.cpusTurn())
+//TEST IF I CAN USE BACKTICK STRING CONCATINIZATION TO INPUT VARIABLES IN A FUNCTION --- YESSS THIS WORKS
+// testFunction = function(a,b) {
+//   let testTarget = document.getElementById(`${a}${b}`)
+//   console.log(testTarget)
+// }
+// testFunction("c", "1")
+//TEST IF THIS FUNCTION WILL SEARCH ELEMENT VALUES UNTIL IT FINDS ONE THAT IS TRUE
+// let whatsThis = document.getElementById("c1").getAttribute("value")
+// console.log(whatsThis) //this works
+
+// const findComputerTargetTrue = function () {
+//   const cpuOptions = ["c1", "c2", "c4", "c5", "c6", "c7", "c8", "c9", "c10"] //lets just gerry ring this
+//     for (let i = 0; i < cpuOptions.length; i++) { //shuffle the array //this loops through the array and changes the value of each element index at least once. 
+//       let j = Math.floor(Math.random() * cpuOptions.length);   //this creates a random ratio between 0-1 and multiples that ratio by the array length, then rounds that product down--representing a value that is within the index range
+//       let temp = cpuOptions[i];                                //this is a temporary variable that contains the the value that was in the index that the current iterator is accessing
+//       cpuOptions[i] = cpuOptions[j];                            //this changes the current index that the iterator has access to the value that occupied index j
+//       cpuOptions[j] = temp;   
+// //      console.log(cpuOptions)//this works
+//     }
+//     for (let k = 0; k < cpuOptions.length; k++){               //this is going to loop through all the items in the array and evalure the value
+//           //      console.log(computerTarget)//this works
+//           let testCheckValue = document.getElementById(cpuOptions[k]).getAttribute("value")
+//                 console.log(testCheckValue)// this works
+//                 console.log(cpuOptions[k])
+//           if(testCheckValue === "true") {                             ///got help because it wasnt working; changed the boolean true to the string true. facepalm
+//             let computerTarget = cpuOptions[k]                        //this declares the variable computer target as a variable and stores the most recent ID that evaluated true in this variable; 
+// //            console.log("this is it: ", computerTarget)//this work
+//           }
+//       }
+// }
+// findComputerTargetTrue()
+
+//TESTING ANOTHER FUNCTION FOR HITTING OTHER CUP
+// console.log("testing code")
+
+// const testing = function (lowerCaseLetter) {
+//     const options = [`${lowerCaseLetter}1`, `${lowerCaseLetter}2`, `${lowerCaseLetter}3`, `${lowerCaseLetter}4`, `${lowerCaseLetter}5`, `${lowerCaseLetter}6`, `${lowerCaseLetter}7`, `${lowerCaseLetter}8`, `${lowerCaseLetter}9`, `${lowerCaseLetter}10`]   //BOUNCES OFF CUP AND LANDS IN ANOTHER CUP, lets take out the last cup that comes up playable
+//       for (i = 0 ; i < options.length; i++){
+//         let checkValue = document.getElementById(options[i]).getAttribute("value")        
+// //        console.log(checkValue)// this works
+// //        console.log(options[i])// this works
+//         if(checkValue === "playable") {                             
+//         let targetOtherCup = options[i] //this is going to store the ID of late element iterated through that was "playable"
+// //        console.log("this is the value:", targetOtherCup)this works
+//         let grabOtherCupHit = document.getElementById(targetOtherCup)   //I need to grab this element by the id stored in targetOtherCup
+//         grabOtherCupHit.setAttribute("value", "non-playable")
+//         grabOtherCupHit.setAttribute("style", "opacity:0")
+//       }
+//     }
+// }
+
+// testing("p")
+
+
+// - ** cHitorNoHit() - First I need to determine if the cup is: 
 //    generated a computeHitOrNoHit value using Math.random()
 //compare that value with conditions:
 //    1)MISS - if this then the function ends and i t becomes the next players turn
