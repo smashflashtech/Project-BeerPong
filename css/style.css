@@ -18,7 +18,7 @@ main{
 .cup {
   background-color: red;
   border-radius: 50%;
-  border: 2px solid bisque;
+  border: 2px solid snow;
   height: 40px;
   width: 40px;
 }
@@ -26,7 +26,7 @@ main{
 .watercup {
   background-color: cyan;
   border-radius: 50%;
-  border: 2px solid bisque;
+  border: 2px solid azure;
   height: 40px;
   width: 40px;
   margin: 0px 30px;
@@ -47,7 +47,7 @@ main{
   border-radius: 50%;
   height: 15px;
   width: 15px;
-  margin: 10px 5px 0px 0px;
+  margin: 19px 0px 0px 16px;
 }
 
 .yourTurn {
@@ -55,7 +55,8 @@ main{
   left: 45px;
   font-size: 12px;
   font-weight: bold;
-  color: brown;
+  color: rgb(165, 42, 42, 1);
+  margin: -16px 0px 0px -15px; /*opacity is set here*/
 }
 
 section.CPUcups {
@@ -86,7 +87,7 @@ section.playercups {
   /* background-color: chartreuse; */
 }
 
-.table {
+.table-styling {
   height: 500px;
   width: 300px;
   background-color: burlywood;

@@ -89,4 +89,4 @@ let cpuHits = 0
 //  - set all opacities to 1 
 //  - set all values to true
 //  - set cpuHits to 0
-//  - set Player Hits 
+//  - set Player Hits to 0
