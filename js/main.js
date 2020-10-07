@@ -1,23 +1,3 @@
-//THINGS TO DO
-//First we will target just for chance of targeting one cup at a time
-//THEN - if time permitting we will do a bounce option
-//     - then if time permitting we can consider adding a hit/miss option for bounces
-//then we can add re-racking
-//      -six cups
-//      -three-cups
-//      -one-cup
-//STRETCH GOAL: Then we animate
-//      - focus on ball animation
-//      -could animate liquid in cups
-//OTHER STUFF:
-//      -you can beautify
-//            - wood grain table
-//            - add ring marks when cups dim
-
-//START HERE//
-
-
-
 const beerPong = {
   pHits: 0,      //CREATE HIT COUNTERS:
   cHits: 0,
@@ -38,37 +18,44 @@ const beerPong = {
     } else if (hitOrNoHit >= .34 && hitOrNoHit <= .66) {
       window.alert("Check out that laser shot! It's a hit!")
       let target = document.getElementById(`${lowerCaseLetter}${numberOfTargetCup}`)                       //HIT numberOfTargetCup - it should grab the element with id = "lowerCaseLetter(numberOfTargetCup)"
-      //the player will never select anything that is false..because i should have turned that event listener off, so what i should do is have the computer evaluation of value in the computers turn function
-      target.setAttribute("style", "opacity:0") //Make the cup disappear
-      target.setAttribute("value", "not-playable")   //change its value to false
-      let updateHitCounters = `${lowerCaseLetter}Hits` //template string would not work with this. so i stored the string in a variable
-      this.updateHitCounters = this.updateHitCounters++ //adds one to the hits counter for respective player/cpu//i wonder if this is redundant and i could just write this.`${lowerCaseLetter}Hits`++
-      this.turnCounter = this.turnCounter++  //adds one to the turnCounter
+//                                                                                                         //the player will never select anything that is false..because i should have turned that event listener off, so what i should do is have the computer evaluation of value in the computers turn function
+      target.setAttribute("style", "opacity:0")                                                            //Make the cup disappear
+      target.setAttribute("value", "non-playable")                                                         //change its value to false
+      if(lowerCaseLetter === "p") {
+        this.pHits = this.pHits++ 
+      } else if (lowerCaseLetter === "c") {
+        this.cHits =this.cHits++
+      }
+      this.turnCounter = this.turnCounter++                                                                //adds one to the turnCounter
       whosTurn()
     } else if (hitOrNoHit >= .67 && hitOrNoHit <= 1 ) {
           window.alert("OoOo, it bounced off the target and sank into another cup!!")  
           const options = [`${lowerCaseLetter}1`, `${lowerCaseLetter}2`, `${lowerCaseLetter}3`, `${lowerCaseLetter}4`, `${lowerCaseLetter}5`, `${lowerCaseLetter}6`, `${lowerCaseLetter}7`, `${lowerCaseLetter}8`, `${lowerCaseLetter}9`, `${lowerCaseLetter}10`]   //BOUNCES OFF CUP AND LANDS IN ANOTHER CUP, lets take out the last cup that comes up playable
           for (i = 0 ; i < options.length; i++){
-          let checkValue = document.getElementById(options[i]).getAttribute("value")        
-//        console.log(checkValue)// this works
-//        console.log(options[i])// this works
-          if(checkValue === "playable") {                             
-          let targetOtherCup = options[i] //this is going to store the ID of late element iterated through that was "playable"
-//        console.log("this is the value:", targetOtherCup)this works
-          let grabOtherCupHit = document.getElementById(targetOtherCup)   //I need to grab this element by the id stored in targetOtherCup
-          grabOtherCupHit.setAttribute("value", "non-playable")
-          grabOtherCupHit.setAttribute("style", "opacity:0")
-          let updateHitCounters = `${lowerCaseLetter}Hits` //template string would not work with this. so i stored the string in a variable
-          this.updateHitCounters = this.updateHitCounters++ //adds one to the respectivve player hit counter
-          this.turnCounter = this.turnCounter++                       //add one to the turncounter
-          whosTurn()  
-      }
+            let checkValue = document.getElementById(options[i]).getAttribute("value")        
+  //        console.log(checkValue)// this works
+  //        console.log(options[i])// this works
+            if(checkValue === "playable") {                             
+              let targetOtherCup = options[i]                                                                   //this is going to store the ID of late element iterated through that was "playable"
+    //        console.log("this is the value:", targetOtherCup)this works
+              let grabOtherCupHit = document.getElementById(targetOtherCup)                                     //I need to grab this element by the id stored in targetOtherCup
+              grabOtherCupHit.setAttribute("value", "non-playable")
+              grabOtherCupHit.setAttribute("style", "opacity:0")
+              if(lowerCaseLetter === "p") {
+                this.pHits = this.pHits++ 
+              } else if (lowerCaseLetter === "c") {
+                this.cHits =this.cHits++
+              }                                       //adds one to the respectivve player hit counter
+              this.turnCounter = this.turnCounter++                                                             //add one to the turncounter
+              whosTurn()  
+            }
+          }
     }
   },
   playersTurn: function () { //UNFINISHED FUNCTION
-    let changeCpuBallOpacity = document.getElementById("cBall") // Dims computer Ball
+    let changeCpuBallOpacity = document.getElementById("cBall")                                             // Dims computer Ball
     changeCpuBallOpacity.setAttribute("style", "opacity:0")
-    let changePlayerBallOpacity = document.getElementById("pBall") //Undims player ball/your turn
+    let changePlayerBallOpacity = document.getElementById("pBall")                                           //Undims player ball/your turn
         changePlayerBallOpacity.setAttribute("style", "opacity:1")
         //add code for hover effect??
         //console.log(changeBallOpacity) //this worked
@@ -101,9 +88,11 @@ const beerPong = {
       }
         this.ballDoesWhat("c", cpusChosenTarget)
   },
-} //!!!!! dont c omment out this one !!!!! this is the end of the object container
+} //!!!!! dont comment out this one !!!!! this is the end of the object container
 
-//-----------------------------------------
+beerPong.ballDoesWhat("c", 10)
+
+//-----------------------------------------[SCRATCH PAD AREA]------------------------------------------------------------------------------------
 // console.log(beerPong.cpusTurn())
 //TEST IF I CAN USE BACKTICK STRING CONCATINIZATION TO INPUT VARIABLES IN A FUNCTION --- YESSS THIS WORKS
 // testFunction = function(a,b) {
@@ -158,29 +147,8 @@ const beerPong = {
 
 // testing("p")
 
-
-// - ** cHitorNoHit() - First I need to determine if the cup is: 
-//    generated a computeHitOrNoHit value using Math.random()
-//compare that value with conditions:
-//    1)MISS - if this then the function ends and i t becomes the next players turn
-//       if hitOrNoHit is <=.33
-//    2)HIT - if this then u run the cpuTakesOutTarget() 
-//       if hitOrNoHit is >=.34 && <=.66
-//    3)BOUNCES OFF CUP AND LANDS IN ANOTHER CUP - this would just display alternative alert text--but it would still run the cpuTakesOutTarget function since the player doesn't know what cup the computer was originally aiming for anyway.
-//       ifHitOrNoHit is >=.67 && <=1 
-
-//  - ** cpuTakesOutTarget() - The computer selects a target; let targetPlayerCup = Math.Floor(Math.Random()*10) --this keeps the number generated below 10
-//          - I need to access the cup with that number...so i need to access the document.getElementbyID()`p${targetPlayerCup}`)
-//          -I need to evaluate if the value is true or false
-//          -If it is true, then that cup's:
-//                  - value set false
-//                  -opacity is set to 0
-
-// - ** dimTheLastTrue() - I need to create a loop that goes backwards from 10 and evaluates the value of each id (p10-p1). 
-//                    - The first element the comes back true will result in:
-//                             - opacity set to 0
-//                             - the value changing to false.
-
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//[REMAINING TO DO STUFF]
 
 //PLAYERS TURN - When its the player turn, toggle opacity for ball to 1
 // - Player must click on the water cup to begin their turn (!== watercup click will result in a prompt "dont for get to wash yoru balls")
@@ -221,9 +189,29 @@ const beerPong = {
 // 3) if the playerHits === 10 then pop up a modal that has a goofy message "player wins"
 
 
-//add New Game Button
+//add New Game Button - maybe this is always present
 // CREATE A FUNCTION to 
 //  - set all opacities to 1 
 //  - set all values to true
 //  - set cpuHits to 0
 //  - set Player Hits to 0
+// 
+
+
+
+
+//THINGS TO DO
+//First we will target just for chance of targeting one cup at a time
+//THEN - if time permitting we will do a bounce option
+//     - then if time permitting we can consider adding a hit/miss option for bounces
+//then we can add re-racking
+//      -six cups
+//      -three-cups
+//      -one-cup
+//STRETCH GOAL: Then we animate
+//      - focus on ball animation
+//      -could animate liquid in cups
+//OTHER STUFF:
+//      -you can beautify
+//            - wood grain table
+//            - add ring marks when cups dim
