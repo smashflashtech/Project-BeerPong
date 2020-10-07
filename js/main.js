@@ -14,7 +14,7 @@ const beerPong = {
     if (hitOrNoHit <=.33) {
       window.alert("Miss!")                                       // MISS
       this.turnCounter = this.turnCounter++                       //add one to the turncounter
-      whosTurn()                                                  //nothing else happens, move on to the next turn
+      this.whosTurn()                                                  //nothing else happens, move on to the next turn
     } else if (hitOrNoHit >= .34 && hitOrNoHit <= .66) {
       window.alert("Check out that laser shot! It's a hit!")
       let target = document.getElementById(`${lowerCaseLetter}${numberOfTargetCup}`)                       //HIT numberOfTargetCup - it should grab the element with id = "lowerCaseLetter(numberOfTargetCup)"
@@ -27,7 +27,7 @@ const beerPong = {
         this.cHits =this.cHits++
       }
       this.turnCounter = this.turnCounter++                                                                //adds one to the turnCounter
-      whosTurn()
+      this.whosTurn()
     } else if (hitOrNoHit >= .67 && hitOrNoHit <= 1 ) {
           window.alert("OoOo, it bounced off the target and sank into another cup!!")  
           const options = [`${lowerCaseLetter}1`, `${lowerCaseLetter}2`, `${lowerCaseLetter}3`, `${lowerCaseLetter}4`, `${lowerCaseLetter}5`, `${lowerCaseLetter}6`, `${lowerCaseLetter}7`, `${lowerCaseLetter}8`, `${lowerCaseLetter}9`, `${lowerCaseLetter}10`]   //BOUNCES OFF CUP AND LANDS IN ANOTHER CUP, lets take out the last cup that comes up playable
@@ -41,13 +41,13 @@ const beerPong = {
               let grabOtherCupHit = document.getElementById(targetOtherCup)                                     //I need to grab this element by the id stored in targetOtherCup
               grabOtherCupHit.setAttribute("value", "non-playable")
               grabOtherCupHit.setAttribute("style", "opacity:0")
-              if(lowerCaseLetter === "p") {
+              if(lowerCaseLetter === "p") {                                                                     //adds one to the hit counter.
                 this.pHits = this.pHits++ 
               } else if (lowerCaseLetter === "c") {
                 this.cHits =this.cHits++
-              }                                       //adds one to the respectivve player hit counter
+              }                                       
               this.turnCounter = this.turnCounter++                                                             //add one to the turncounter
-              whosTurn()  
+              this.whosTurn()  
             }
           }
     }
@@ -57,17 +57,26 @@ const beerPong = {
     changeCpuBallOpacity.setAttribute("style", "opacity:0")
     let changePlayerBallOpacity = document.getElementById("pBall")                                           //Undims player ball/your turn
         changePlayerBallOpacity.setAttribute("style", "opacity:1")
+    let hoverEffectsBall = document.getElementById("player-watercup").setAttribute("class", "watercup wash")
+    for (let i = 1; i <=10; i++){//I want to add a for loop that adds the class for hover effects
+      let getCup = document.getElementById(`p${i}`).setAttribute("class", "cup pick")
+    }
+    //Remember to add to the computers turn a loop that removes the player hover effects
         //add code for hover effect??
         //console.log(changeBallOpacity) //this worked
         //let playersChosenTarget = code to grab input from the onclick
-        this.ballDoesWhat("p", playersChosenTarget)
+        //this.ballDoesWhat("p", playersChosenTarget)
   },
+
   cpusTurn: function () {
     let changePlayerBallOpacity = document.getElementById("pBall") //Dims player ball/your turn
         changePlayerBallOpacity.setAttribute("style", "opacity:0")
     let changeCpuBallOpacity = document.getElementById("cBall") // undims computer ball
         changeCpuBallOpacity.setAttribute("style", "opacity:1")
         //console.log(changeBallOpacity) //this worked
+    for (let i = 1; i <=10; i++){ //This turns off player hover effects
+    let getCup = document.getElementById(`p${i}`).setAttribute("class", "cup")
+    }
         const cpuOptions = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10"] //lets just gerry ring this
     for (let i = 0; i < cpuOptions.length; i++) { //shuffle the array //this loops through the array and changes the value of each element index at least once. 
       let j = Math.floor(Math.random() * cpuOptions.length);   //this creates a random ratio between 0-1 and multiples that ratio by the array length, then rounds that product down--representing a value that is within the index range
@@ -90,62 +99,12 @@ const beerPong = {
   },
 } //!!!!! dont comment out this one !!!!! this is the end of the object container
 
-beerPong.ballDoesWhat("c", 10)
+//beerPong.ballDoesWhat("c", 10)
+//beerPong.playersTurn()
+//beerPong.cpusTurn()
 
 //-----------------------------------------[SCRATCH PAD AREA]------------------------------------------------------------------------------------
-// console.log(beerPong.cpusTurn())
-//TEST IF I CAN USE BACKTICK STRING CONCATINIZATION TO INPUT VARIABLES IN A FUNCTION --- YESSS THIS WORKS
-// testFunction = function(a,b) {
-//   let testTarget = document.getElementById(`${a}${b}`)
-//   console.log(testTarget)
-// }
-// testFunction("c", "1")
-//TEST IF THIS FUNCTION WILL SEARCH ELEMENT VALUES UNTIL IT FINDS ONE THAT IS TRUE
-// let whatsThis = document.getElementById("c1").getAttribute("value")
-// console.log(whatsThis) //this works
 
-// const findComputerTargetTrue = function () {
-//   const cpuOptions = ["c1", "c2", "c4", "c5", "c6", "c7", "c8", "c9", "c10"] //lets just gerry ring this
-//     for (let i = 0; i < cpuOptions.length; i++) { //shuffle the array //this loops through the array and changes the value of each element index at least once. 
-//       let j = Math.floor(Math.random() * cpuOptions.length);   //this creates a random ratio between 0-1 and multiples that ratio by the array length, then rounds that product down--representing a value that is within the index range
-//       let temp = cpuOptions[i];                                //this is a temporary variable that contains the the value that was in the index that the current iterator is accessing
-//       cpuOptions[i] = cpuOptions[j];                            //this changes the current index that the iterator has access to the value that occupied index j
-//       cpuOptions[j] = temp;   
-// //      console.log(cpuOptions)//this works
-//     }
-//     for (let k = 0; k < cpuOptions.length; k++){               //this is going to loop through all the items in the array and evalure the value
-//           //      console.log(computerTarget)//this works
-//           let testCheckValue = document.getElementById(cpuOptions[k]).getAttribute("value")
-//                 console.log(testCheckValue)// this works
-//                 console.log(cpuOptions[k])
-//           if(testCheckValue === "true") {                             ///got help because it wasnt working; changed the boolean true to the string true. facepalm
-//             let computerTarget = cpuOptions[k]                        //this declares the variable computer target as a variable and stores the most recent ID that evaluated true in this variable; 
-// //            console.log("this is it: ", computerTarget)//this work
-//           }
-//       }
-// }
-// findComputerTargetTrue()
-
-//TESTING ANOTHER FUNCTION FOR HITTING OTHER CUP
-// console.log("testing code")
-
-// const testing = function (lowerCaseLetter) {
-//     const options = [`${lowerCaseLetter}1`, `${lowerCaseLetter}2`, `${lowerCaseLetter}3`, `${lowerCaseLetter}4`, `${lowerCaseLetter}5`, `${lowerCaseLetter}6`, `${lowerCaseLetter}7`, `${lowerCaseLetter}8`, `${lowerCaseLetter}9`, `${lowerCaseLetter}10`]   //BOUNCES OFF CUP AND LANDS IN ANOTHER CUP, lets take out the last cup that comes up playable
-//       for (i = 0 ; i < options.length; i++){
-//         let checkValue = document.getElementById(options[i]).getAttribute("value")        
-// //        console.log(checkValue)// this works
-// //        console.log(options[i])// this works
-//         if(checkValue === "playable") {                             
-//         let targetOtherCup = options[i] //this is going to store the ID of late element iterated through that was "playable"
-// //        console.log("this is the value:", targetOtherCup)this works
-//         let grabOtherCupHit = document.getElementById(targetOtherCup)   //I need to grab this element by the id stored in targetOtherCup
-//         grabOtherCupHit.setAttribute("value", "non-playable")
-//         grabOtherCupHit.setAttribute("style", "opacity:0")
-//       }
-//     }
-// }
-
-// testing("p")
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //[REMAINING TO DO STUFF]

@@ -21,6 +21,7 @@ main{
   font-weight: bold;
 }
 
+
 .playerSide {
   margin: -15px 0px 0px 0px;
   color: rgb(63, 34, 0);
@@ -35,8 +36,18 @@ main{
   width: 40px;
 }
 
-.watercup {
+.pick:hover {
+  background-color: firebrick;
+  box-shadow: 3px 3px white ;
+
+}
+
+.wash:hover {
   background-color: cyan;
+}
+
+.watercup {
+  background-color: skyblue;
   border-radius: 50%;
   border: 2px solid azure;
   height: 40px;
@@ -142,3 +153,7 @@ section.playerSide-container {
   display: flex;
   justify-content: center;
 }
+
+/* #p1 {
+  background-color:firebrick;
+}  tested to see if i manipulated by ID would it overwrite color-- it does */
