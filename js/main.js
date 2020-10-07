@@ -1,13 +1,19 @@
 const beerPong = {
   pHits: 0,      //CREATE HIT COUNTERS:
   cHits: 0,
-  turnCounter: 0,
+  turnCounter: 1,
   whosTurn: function () {                               //CREATE A FUNCTION: There needes to be a function that decides who's turn it is
-    if (this.turnCounter %2 !== 0) {                    //UNFINISHED: within the who's turn i should have a conditional that checks the hit score to determine whether or not to continue running
-      playersTurn()
-    } else {
-      cpusTurn()
-    }
+    if(this.pHits === 10){
+      window.alert("YOU WIN!!! The computer rebooted in a bush and now it's motherboard is fried!")
+    } else if (this.cHits ===10) {
+      window.alert("You lose. Better luck next time. Is that your phone at the bottom of the swimming pool?")
+    } else if (this.pHits !== 10 || this.cHits !== 10) {
+      if (this.turnCounter %2 !== 0) {                    //within the who's turn i should have a conditional that checks the hit score to determine whether or not to continue running
+        this.playersTurn()
+      } else {
+        this.cpusTurn()
+      }
+    } 
   },
   ballDoesWhat: function (lowerCaseLetter, targetCupId) {
     let hitOrNoHit = Math.random()
@@ -75,11 +81,11 @@ const beerPong = {
         if(playerBall.getAttribute("value") === "unwashed") {
           window.alert("PUBLIC SERVICE ANNOUNCEMENT: Don't forget to wash your balls.")
         } else if (playerBall.getAttribute("value") === "washed") {
-          let playersChosenTarget = evtObj.target.getAttribute("id")
+          let playersChosenTargetId = evtObj.target.getAttribute("id")
           //console.log(playersChosenTarget)
           // i want it to grab the ID of the div that was clicked on
           // then i want it o run that parameter in
-          this.ballDoesWhat("p", playersChosenTarget)
+          beerPong.ballDoesWhat("p", playersChosenTargetId)
         }
       }
     })
@@ -113,7 +119,7 @@ const beerPong = {
 //                console.log(checkValue)// this works
 //                console.log(cpuOptions[k]) // this works
           if(checkValue === "playable") {                             ///got help because it wasnt working; changed the boolean true to the string true. facepalm
-            let cpusChosenTarget = cpuOptions[k]                        //this declares the variable computer target as a variable and stores the most recent ID that evaluated true in this variable; 
+            let cpusChosenTargetId = cpuOptions[k]                        //this declares the variable computer target as a variable and stores the most recent ID that evaluated true in this variable; 
 //            console.log("this is it: ", computerTarget)//this work
           }
       }
@@ -122,9 +128,9 @@ const beerPong = {
 } //!!!!! dont comment out this one !!!!! this is the end of the object container
 
 //beerPong.ballDoesWhat("c", "c8")
-beerPong.playersTurn()
+//beerPong.playersTurn()
 ///beerPong.cpusTurn()
-
+beerPong.whosTurn()
 //-----------------------------------------[SCRATCH PAD AREA]------------------------------------------------------------------------------------
 
 
