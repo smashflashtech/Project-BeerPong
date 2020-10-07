@@ -71,7 +71,7 @@ main{
   margin: -16px 0px 0px -15px; /*opacity is set here*/
 }
 
-section.CPUcups {
+section.CPUSide-container {
   height: 160px; 
   width: 160px;
   /* background-color: blue; */
@@ -91,7 +91,7 @@ section.player-water-placement {
   top: 45px;
 }
 
-section.playercups {
+section.playerSide-container {
   /* display:flex;
   justify-content: center; */
   height: 160px; 
