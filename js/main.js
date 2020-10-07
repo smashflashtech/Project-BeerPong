@@ -9,7 +9,7 @@ const beerPong = {
       cpusTurn()
     }
   },
-  ballDoesWhat: function (lowerCaseLetter, numberOfTargetCup) {
+  ballDoesWhat: function (lowerCaseLetter, targetCupId) {
     let hitOrNoHit = Math.random()
     if (hitOrNoHit <=.33) {
       window.alert("Miss!")                                       // MISS
@@ -17,7 +17,7 @@ const beerPong = {
       this.whosTurn()                                                  //nothing else happens, move on to the next turn
     } else if (hitOrNoHit >= .34 && hitOrNoHit <= .66) {
       window.alert("Check out that laser shot! It's a hit!")
-      let target = document.getElementById(`${lowerCaseLetter}${numberOfTargetCup}`)                       //HIT numberOfTargetCup - it should grab the element with id = "lowerCaseLetter(numberOfTargetCup)"
+      let target = document.getElementById(targetCupId)                       //HIT targetCupID - it should grab the element with id = "lowerCaseLetter(targetCupID)"
 //                                                                                                         //the player will never select anything that is false..because i should have turned that event listener off, so what i should do is have the computer evaluation of value in the computers turn function
       target.setAttribute("style", "opacity:0")                                                            //Make the cup disappear
       target.setAttribute("value", "non-playable")                                                         //change its value to false
@@ -55,18 +55,40 @@ const beerPong = {
   playersTurn: function () { //UNFINISHED FUNCTION
     let changeCpuBallOpacity = document.getElementById("cBall")                                             // Dims computer Ball
     changeCpuBallOpacity.setAttribute("style", "opacity:0")
-    let changePlayerBallOpacity = document.getElementById("pBall")                                           //Undims player ball/your turn
-        changePlayerBallOpacity.setAttribute("style", "opacity:1")
+    let changeYourTurnOpacity = document.getElementById("yTurn")                                           //Undims player ball/your turn
+        changeYourTurnOpacity.setAttribute("style", "opacity:1")
     let hoverEffectsBall = document.getElementById("player-watercup").setAttribute("class", "watercup wash")
-    for (let i = 1; i <=10; i++){//I want to add a for loop that adds the class for hover effects
+    for (let i = 1; i <=10; i++){                                                                           //I want to add a for loop that adds the class for hover effects
       let getCup = document.getElementById(`p${i}`).setAttribute("class", "cup pick")
     }
-    //Remember to add to the computers turn a loop that removes the player hover effects
-        //add code for hover effect??
+    let playerBall = document.getElementById("pBall")
+    let playerWaterCup = document.getElementById("player-watercup")
+    playerWaterCup.addEventListener("click", function(eventObject) {
+        playerBall.setAttribute("style", "opacity:1")          //I need a wash ball function.. i guess we can do a value of wash/unwash and have the function wash on click
+        playerBall.setAttribute("value", "washed")  
+      })
+    let cpuSideCups = document.getElementById("cSide")//i need to add an event listener to click on any of the cups on the computer side but not the section part its in (so the partent)) Need to look at that lab about bluuets.
+    console.log(cpuSideCups)
+    cpuSideCups.addEventListener("click", function(evtObj){
+      //console.log(evtObj.target)//this works
+      if(evtObj.target.tagName === "DIV"){
+        if(playerBall.getAttribute("value") === "unwashed") {
+          window.alert("PUBLIC SERVICE ANNOUNCEMENT: Don't forget to wash your balls.")
+        } else if (playerBall.getAttribute("value") === "washed") {
+          let playersChosenTarget = evtObj.target.getAttribute("id")
+          //console.log(playersChosenTarget)
+          // i want it to grab the ID of the div that was clicked on
+          // then i want it o run that parameter in
+          this.ballDoesWhat("p", playersChosenTarget)
+        }
+      }
+    })
+    //if ball is not washed, click any cup will result in alert "dont forget to wash yoru ball"
+    //add code for hover effect??
         //console.log(changeBallOpacity) //this worked
         //let playersChosenTarget = code to grab input from the onclick
         //this.ballDoesWhat("p", playersChosenTarget)
-  },
+},
 
   cpusTurn: function () {
     let changePlayerBallOpacity = document.getElementById("pBall") //Dims player ball/your turn
@@ -95,13 +117,13 @@ const beerPong = {
 //            console.log("this is it: ", computerTarget)//this work
           }
       }
-        this.ballDoesWhat("c", cpusChosenTarget)
+        this.ballDoesWhat("c", cpusChosenTargetId)
   },
 } //!!!!! dont comment out this one !!!!! this is the end of the object container
 
-//beerPong.ballDoesWhat("c", 10)
-//beerPong.playersTurn()
-//beerPong.cpusTurn()
+//beerPong.ballDoesWhat("c", "c8")
+beerPong.playersTurn()
+///beerPong.cpusTurn()
 
 //-----------------------------------------[SCRATCH PAD AREA]------------------------------------------------------------------------------------
 

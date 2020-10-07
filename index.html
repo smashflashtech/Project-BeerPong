@@ -9,27 +9,27 @@
   <script src ="./js/main.js" defer></script>
 </head>
 <body>
-  <h1>Virtual Beer Bong</h1>
+  <h1>Virtual Beer Pong</h1>
   <main>
     <section class="main-table">
      
       <div class="table-styling">
         <div class="cpuSide">Computer's Side</div>
-        <section class ="CPUSide-container">
-          <div class="CPU-r4">
+        <section class ="CPUSide-container" id="cSide">
+          <section class="CPU-r4">
             <div id="p10" class="cup" value="playable"  style="opacity:1">10</div> <!--remember to remove text numbers later-->
             <div id="p9" class="cup" value="playable"  style="opacity:1">9</div>  
             <div id="p8" class="cup" value="playable"  style="opacity:1">8</div>
-            <div id="p7" class="cup" value="playable"  style="opacity:1">7</div> </div>
-          <div class="CPU-r3">  
+            <div id="p7" class="cup" value="playable"  style="opacity:1">7</div> </section>
+          <section class="CPU-r3">  
             <div id="p6" class="cup" value="playable"  style="opacity:1">6</div>
             <div id="p5" class="cup" value="playable"  style="opacity:1">5</div>
-            <div id="p4" class="cup" value="playable"  style="opacity:1">4</div></div>
-          <div class="CPU-r2">
+            <div id="p4" class="cup" value="playable"  style="opacity:1">4</div></section>
+          <section class="CPU-r2">
             <div id="p3" class="cup" value="playable"  style="opacity:1">3</div>
-            <div id="p2" class="cup" value="playable"  style="opacity:1">2</div></div>
-          <div class="CPU-r1">
-            <div id="p1" class="cup" value="playable"  style="opacity:1">1</div></div>
+            <div id="p2" class="cup" value="playable"  style="opacity:1">2</div></section>
+          <section class="CPU-r1">
+            <div id="p1" class="cup" value="playable"  style="opacity:1">1</div></section>
           </section>
           <section class="cpu-water-placement">
             <div id="CPU-watercup" class="watercup">
@@ -37,8 +37,8 @@
           </section>
           <section class="player-water-placement">
             <div id="player-watercup" class="watercup">
-              <div id="pBall" class="playerBall" style="opacity:0"><div class="yourTurn" id="yTurn">Your Turn</div>
-            </div>
+              <div id="pBall" class="playerBall" style="opacity:0" value="unwashed"></div>
+              <div class="yourTurn" id="yTurn" style="opacity:0">Your Turn</div>
           </section>
 
           <section class ="playerSide-container">
