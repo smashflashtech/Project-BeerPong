@@ -1,13 +1,20 @@
+
+const aText = document.querySelector("p")
+console.log(aText)
+var delayInMilliseconds = 5000; //1 second
+
+
+
 const beerPong = {
   pHits: 0,      //CREATE HIT COUNTERS:
   cHits: 0,
   turnCounter: 1,
   whosTurn: function () {                               //CREATE A FUNCTION: There needes to be a function that decides who's turn it is
-    if(this.pHits === 10){
-      window.alert("YOU WIN!!! The computer rebooted in a bush and now it's motherboard is fried!")
+  if(this.pHits === 10){
+      aText.innerHTML = "YOU WIN!!! The computer rebooted in a bush and now it's motherboard is fried!"
     } else if (this.cHits ===10) {
-      window.alert("You lose. Better luck next time. Is that your phone at the bottom of the swimming pool?")
-    } else if (this.pHits < 10 || this.cHits < 10) {
+      aText.innerHTML = "You lose. Better luck next time. Is that your phone at the bottom of the swimming pool?"
+    } else { //this conditional needs fixing//we dont need a conditional
       if (this.turnCounter %2 !== 0) {                    //within the who's turn i should have a conditional that checks the hit score to determine whether or not to continue running
         this.playersTurn()
       } else {
@@ -17,14 +24,14 @@ const beerPong = {
   },
   ballDoesWhat: function (lowerCaseLetter, targetCupId) {
     let hitOrNoHit = Math.random()
-
+//    let aText = document.querySelector("p")
     //FIRST CONSEQUENCE - MISS
     if (hitOrNoHit <=.33) {
-      window.alert("Miss!")
+      aText.innerHTML = "Miss!" 
       
       // SECOND CONSEQUENCE - HIT                                             //nothing else happens, move on to the next turn
     } else if (hitOrNoHit >= .34 && hitOrNoHit <= .66) {
-      window.alert("Check out that laser shot! It's a hit!")
+      aText.innerHTML = "Check out that laser shot! It's a hit!"
       let target = document.getElementById(targetCupId)                       //HIT targetCupID - it should grab the element with id = "lowerCaseLetter(targetCupID)" // the player will never select anything that is false..because i should have turned that event listener off, so what i should do is have the computer evaluation of value in the computers turn function
       target.setAttribute("style", "opacity:0")                                                            //Make the cup disappear
       target.setAttribute("value", "non-playable")                                                         //change its value to false
@@ -36,7 +43,7 @@ const beerPong = {
 
     //THIRD CONSEQUENCE - BOUNCE OFF AND HIT
     } else if (hitOrNoHit >= .67 && hitOrNoHit <= 1 ) {
-          window.alert("OoOo, it bounced off the target and sank into another cup!!")  
+          aText.innerHTML = "OoOo, it bounced off the target and sank into another cup!!" 
           let targetOtherCup = ""
           if(lowerCaseLetter === "p") {
             const playerIdArray=["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10"] 
@@ -89,7 +96,8 @@ const beerPong = {
     const getPlayerTarget = function (evtObj) {
       if(evtObj.target.tagName === "DIV"){
         if(playerBall.getAttribute("value") === "unwashed") {
-          window.alert("PUBLIC SERVICE ANNOUNCEMENT: Don't forget to wash your balls.")
+          let aText = document.querySelector("p")
+          aText.innerHTML = "PUBLIC SERVICE ANNOUNCEMENT: Don't forget to wash your balls." 
         } else if (playerBall.getAttribute("value") === "washed") {
           let playersChosenTargetId = evtObj.target.getAttribute("id")
           beerPong.ballDoesWhat("p", playersChosenTargetId)
@@ -105,7 +113,9 @@ const beerPong = {
         changePlayerBallOpacity.setAttribute("style", "opacity:0")
     let changeCpuBallOpacity = document.getElementById("cBall") // undims computer ball
         changeCpuBallOpacity.setAttribute("style", "opacity:1")
-//    window.alert("The computer takes a shot! Let's see what happens!")
+    aText.innerHTML = "The computer takes a shot! Let's see what happens!"
+    setTimeout(function() {
+    }, delayInMilliseconds);
         //console.log(changeBallOpacity) //this worked
     for (let z = 1; z <=10; z++){ //This turns off player hover effects
     let getCup = document.getElementById(`p${z}`).setAttribute("class", "cup")
@@ -129,7 +139,7 @@ const beerPong = {
 //            console.log("this is it: ", cpusChosenTargetId)//this work
           }
       }
-      console.log("computer choice passed into the ballDoesWhat Function: ", cpusChosenTargetId)
+      console.log("computer initial choice: ", cpusChosenTargetId)
       this.ballDoesWhat("c", cpusChosenTargetId)
   },
 } //!!!!! dont comment out this one !!!!! this is the end of the object container

@@ -15,6 +15,39 @@ main{
   justify-content: space-evenly;
 }
 
+p {
+  margin: 0px;
+}
+
+.instructions {
+  font-size: 12px;
+  color: cyan;
+  }
+
+.alertBox {
+  background-color: rgb(0, 54, 54);
+  border-radius: 5px;
+  padding: 0px 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+}
+
+.table-styling {
+  height: 500px;
+  width: 300px;
+  background-color: burlywood;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px 0px 20px 0px;
+}
+
 .cpuSide {
   margin: 0px 0px -15px 0px;
   color: rgb(63, 34, 0);
@@ -110,15 +143,7 @@ section.playerSide-container {
   /* background-color: chartreuse; */
 }
 
-.table-styling {
-  height: 500px;
-  width: 300px;
-  background-color: burlywood;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
+
 
 .CPU-r2 {
   display: flex;
