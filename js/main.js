@@ -120,7 +120,7 @@ ball: function (lowerCaseLetter, targetCupId) {
       if(evtObj.target.tagName === "DIV"){                          //listens only to cups not to blank space
         if(playerBall.getAttribute("value") === "unwashed") {       //TELLS YO IF THE BALLS ARE DIRTY
           let text = document.querySelector("p")
-          text.innerHTML = "PUBLIC SERVICE ANNOUNCEMENT: Don't forget to wash your balls." 
+          text.innerHTML = "<span class='psa'>PUBLIC SERVICE ANNOUNCEMENT:</span> Don't forget to wash your balls." 
         } else if (playerBall.getAttribute("value") === "washed") { //ASSIGNS THE TARGET ID TO A VARIABLE
           playersTargetId = evtObj.target.getAttribute("id")
           console.log(playersTargetId)
