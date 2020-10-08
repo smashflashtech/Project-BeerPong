@@ -82,7 +82,7 @@ ball: function (lowerCaseLetter, targetCupId) {
         this.pHits = this.pHits + 1 
       } else if (lowerCaseLetter === "c") {
         this.cHits =this.cHits + 1
-      }
+      } 
       
       //THIRD CONSEQUENCE - BOUNCE OFF AND HIT
     } else if (hitOrNoHit >= .67 && hitOrNoHit <= 1 ) {
