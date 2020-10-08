@@ -3,6 +3,7 @@ const text = document.querySelector("p")
 let playerBall = document.getElementById("pBall")
 let playerWaterCup = document.getElementById("player-watercup")
 let changeYourTurnOpacity = document.getElementById("yTurn") 
+let cpuSideCups = document.getElementById("cSide")
 //need to declare event listener function for balls up here
 //or within the object 
 const washBall = (eventObject) => { 
@@ -49,6 +50,15 @@ const beerPong = {
 },
 // THIS FUNCTION DETERMINES WHAT THE BALL DOES (3 POSSIBLE OUTCOMES)
 ball: function (lowerCaseLetter, targetCupId) {
+    let cBallOpacity = document.getElementById("cBall") //DIMS COMPUTER BALL                                          
+    cBallOpacity.setAttribute("style", "opacity:0")   
+    playerWaterCup.removeEventListener("click", washBall)    //TURNS OFF EVENT LISTENER
+    cpuSideCups.removeEventListener("click", pClicksTarget)  //TURNS OFF EVENT LISTENER
+    let hoverEffectsBall = document.getElementById("player-watercup").setAttribute("class", "watercup")  //REMOVES HOVER EFFECT
+    for (let z = 1; z <=10; z++){                                   //REMOVES HOVER EFFECTS
+      let getCup = document.getElementById(`p${z}`).setAttribute("class", "cup")
+      }
+
     this.turnCounter = this.turnCounter + 1                                                            
     let hitOrNoHit = Math.random()
 
@@ -123,9 +133,7 @@ ball: function (lowerCaseLetter, targetCupId) {
     }
   },
   playersTurn: function () { 
-    let cBallOpacity = document.getElementById("cBall") //DIMS COMPUTER BALL                                          
-    cBallOpacity.setAttribute("style", "opacity:0")                  
-        changeYourTurnOpacity.setAttribute("style", "opacity:1")//DISPLAYS YOUR TURN 
+    changeYourTurnOpacity.setAttribute("style", "opacity:1")//DISPLAYS YOUR TURN 
     let hoverEffectsBall = document.getElementById("player-watercup").setAttribute("class", "watercup wash") //ADDS HOVER EFFECTS
     for (let i = 1; i <=10; i++){                                                                            //ADDS HOVER EFFECTS
       let getCup = document.getElementById(`p${i}`).setAttribute("class", "cup pick")
@@ -133,7 +141,6 @@ ball: function (lowerCaseLetter, targetCupId) {
     // let playerBall = document.getElementById("pBall")
     // let playerWaterCup = document.getElementById("player-watercup")
     playerWaterCup.addEventListener("click", washBall)    //LISTENS FOR CLICKS TO WASH THE BALL
-    let cpuSideCups = document.getElementById("cSide")
     let playersTargetId = ""
     cpuSideCups.addEventListener("click", pClicksTarget)  //LISTENS FOR CLICKS FOR THE TARGET )
     playerBall.setAttribute("value", "unwashed")          //BALL IS DIRTY AFTER USE
@@ -142,10 +149,6 @@ ball: function (lowerCaseLetter, targetCupId) {
   cpusTurn: function () {
     let cBallOpacity = document.getElementById("cBall")     // UNDIMS COMPUTER BALL
         cBallOpacity.setAttribute("style", "opacity:1")    
-    for (let z = 1; z <=10; z++){                                   //REMOVES HOVER EFFECTS
-    let getCup = document.getElementById(`p${z}`).setAttribute("class", "cup")
-    }
-    let hoverEffectsBall = document.getElementById("player-watercup").setAttribute("class", "watercup") 
     const cpuOptions = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10"] 
     for (let i = 0; i < cpuOptions.length; i++) {                                       //SHUFFLES THE ARRAY
       let j = Math.floor(Math.random() * cpuOptions.length);  
@@ -228,7 +231,8 @@ document.getElementById("start").addEventListener("click", function(eventObject)
 // player clicks ok
 // whosTurn runs
 
-
+// playerWaterCup.removeEventListener("click", washBall)    //TURNS OFF EVENT LISTENER
+// cpuSideCups.removeEventListener("click", pClicksTarget)  //TURNS OFF EVENT LISTENER
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //[REMAINING TO DO STUFF]
 
