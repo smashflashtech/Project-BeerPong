@@ -12,11 +12,26 @@ const beerPong = {
   //THIS FUNCTION DETERMINES:
   // -If the game should keep running
   // -Who's turn is it Player (Odds) or Computer (evens)
+  newGame: function(eventObject) {
+    this.pHits = 0
+    this.cHits = 0
+    this.turnCounter = 1
+    for(let i = 1; i <=10; i++){
+      document.getElementById(`p${i}`).setAttribute("value", "playable")
+      document.getElementById(`c${i}`).setAttribute("value", "playable")
+    }
+    text.innerHTML = "Ready to bounce some balls and grip a dip in some bubbly beverage?!<br><span id='start' class='instructions'>Wash your ball and take aim to see what happens. [START]</span>"
+    document.getElementById("start").addEventListener("click", function(eventObject){  //START BUTTON
+      beerPong.whosTurn()
+    })
+  },
   whosTurn: function () {                               
     if(this.pHits === 10){
-      text.innerHTML = "<span class='yellow'>YOU WIN!!!</span> The computer rebooted in a bush and now it's motherboard is fried!"
+      text.innerHTML = "<span class='yellow'>YOU WIN!!!</span> The computer rebooted in a bush and now it's motherboard is fried! <span id='nGame'>[NEW GAME]</span>"
+      document.getElementById("nGame").addEventListener("click", this.newGame)
     } else if (this.cHits ===10) {
-      text.innerHTML = "<span class='yellow'>YOU LOSE.</span> Better luck next time. Is that your phone at the bottom of the swimming pool?"
+      text.innerHTML = "<span class='yellow'>YOU LOSE.</span> Better luck next time. Is that your phone at the bottom of the swimming pool? <span id='nGame'>[NEW GAME]</span>"
+      document.getElementById("nGame").addEventListener("click", this.newGame)
     } else { 
       if (this.turnCounter %2 !== 0) {
       this.playersTurn()
@@ -170,9 +185,9 @@ ball: function (lowerCaseLetter, targetCupId) {
   },
 } 
 
-document.getElementById("start").addEventListener("click", function(eventObject){  //START BUTTON
-  beerPong.whosTurn()
-})
+
+beerPong.newGame()
+
 //beerPong.ball("c", "c8")
 //beerPong.playersTurn()
 //beerPong.cpusTurn()
