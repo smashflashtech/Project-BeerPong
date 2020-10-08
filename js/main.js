@@ -1,8 +1,31 @@
 
 const text = document.querySelector("p")
+let playerBall = document.getElementById("pBall")
+let playerWaterCup = document.getElementById("player-watercup")
+let changeYourTurnOpacity = document.getElementById("yTurn") 
 //need to declare event listener function for balls up here
 //or within the object 
-
+const washBall = (eventObject) => { 
+  playerBall.setAttribute("style", "opacity:1")          
+  playerBall.setAttribute("value", "washed")  
+}
+const pClicksTarget = (evtObj) => {        
+  if(evtObj.target.tagName === "DIV"){                          //listens only to cups not to blank space
+    if(playerBall.getAttribute("value") === "unwashed") {       //TELLS YO IF THE BALLS ARE DIRTY
+      let text = document.querySelector("p")
+      text.innerHTML = "<span class='psa'>PUBLIC SERVICE ANNOUNCEMENT:</span> Don't forget to wash your balls." 
+    } else if (playerBall.getAttribute("value") === "washed") { //ASSIGNS THE TARGET ID TO A VARIABLE
+      playersTargetId = evtObj.target.getAttribute("id")
+      console.log(playersTargetId)
+      text.innerHTML = "Let's see what happens! <span id='ok'>[CLICK OK]</span>" //RUNS BALL DOES WHAT
+      document.getElementById("ok").addEventListener("click", function(evtObj) {
+      playerBall.setAttribute("style", "opacity:0") //working here
+      changeYourTurnOpacity.setAttribute("style", "opacity:0")//working here
+      beerPong.ball("p", playersTargetId)         //THE VARIABLE IS PASSED INTO THE BALL DOES WHAT FUNCTION
+    })
+    }
+  }
+}
 
 const beerPong = {
   pHits: 0,
@@ -101,39 +124,19 @@ ball: function (lowerCaseLetter, targetCupId) {
   },
   playersTurn: function () { 
     let cBallOpacity = document.getElementById("cBall") //DIMS COMPUTER BALL                                          
-    cBallOpacity.setAttribute("style", "opacity:0")
-    let changeYourTurnOpacity = document.getElementById("yTurn") //DISPLAYS YOUR TURN                   
-        changeYourTurnOpacity.setAttribute("style", "opacity:1")
+    cBallOpacity.setAttribute("style", "opacity:0")                  
+        changeYourTurnOpacity.setAttribute("style", "opacity:1")//DISPLAYS YOUR TURN 
     let hoverEffectsBall = document.getElementById("player-watercup").setAttribute("class", "watercup wash") //ADDS HOVER EFFECTS
     for (let i = 1; i <=10; i++){                                                                            //ADDS HOVER EFFECTS
       let getCup = document.getElementById(`p${i}`).setAttribute("class", "cup pick")
     }
-    let playerBall = document.getElementById("pBall")
-    let playerWaterCup = document.getElementById("player-watercup")
-    playerWaterCup.addEventListener("click", function(eventObject) { //LISTENS FOR CLICKS TO WASH THE BALL
-        playerBall.setAttribute("style", "opacity:1")          
-        playerBall.setAttribute("value", "washed")  
-      })
+    // let playerBall = document.getElementById("pBall")
+    // let playerWaterCup = document.getElementById("player-watercup")
+    playerWaterCup.addEventListener("click", washBall)    //LISTENS FOR CLICKS TO WASH THE BALL
     let cpuSideCups = document.getElementById("cSide")
     let playersTargetId = ""
-    cpuSideCups.addEventListener("click", function(evtObj) {        //LISTENS FOR CLICKS FOR THE TARGET
-      if(evtObj.target.tagName === "DIV"){                          //listens only to cups not to blank space
-        if(playerBall.getAttribute("value") === "unwashed") {       //TELLS YO IF THE BALLS ARE DIRTY
-          let text = document.querySelector("p")
-          text.innerHTML = "<span class='psa'>PUBLIC SERVICE ANNOUNCEMENT:</span> Don't forget to wash your balls." 
-        } else if (playerBall.getAttribute("value") === "washed") { //ASSIGNS THE TARGET ID TO A VARIABLE
-          playersTargetId = evtObj.target.getAttribute("id")
-          console.log(playersTargetId)
-          text.innerHTML = "Let's see what happens! <span id='ok'>[CLICK OK]</span>" //RUNS BALL DOES WHAT
-          document.getElementById("ok").addEventListener("click", function(evtObj) {
-          playerBall.setAttribute("style", "opacity:0") //working here
-          changeYourTurnOpacity.setAttribute("style", "opacity:0")//working here
-          beerPong.ball("p", playersTargetId)         //THE VARIABLE IS PASSED INTO THE BALL DOES WHAT FUNCTION
-        })
-        }
-      }
-    })
-    playerBall.setAttribute("value", "unwashed")
+    cpuSideCups.addEventListener("click", pClicksTarget)  //LISTENS FOR CLICKS FOR THE TARGET )
+    playerBall.setAttribute("value", "unwashed")          //BALL IS DIRTY AFTER USE
   },
 
   cpusTurn: function () {
