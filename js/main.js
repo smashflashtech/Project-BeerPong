@@ -4,13 +4,32 @@ let playerBall = document.getElementById("pBall")
 let playerWaterCup = document.getElementById("player-watercup")
 let changeYourTurnOpacity = document.getElementById("yTurn") 
 let cpuSideCups = document.getElementById("cSide")
-//need to declare event listener function for balls up here
-//or within the object 
-const washBall = function(eventObject) { 
+
+const beerPong = {
+  pHits: 0,
+  cHits: 0,
+  turnCounter: 1,
+  //THIS FUNCTION DETERMINES:
+  // -If the game should keep running
+  // -Who's turn is it Player (Odds) or Computer (evens)
+  whosTurn: function () {                               
+    if(this.pHits === 10){
+      text.innerHTML = "YOU WIN!!! The computer rebooted in a bush and now it's motherboard is fried!"
+    } else if (this.cHits ===10) {
+      text.innerHTML = "You lose. Better luck next time. Is that your phone at the bottom of the swimming pool?"
+    } else { 
+      if (this.turnCounter %2 !== 0) {
+      this.playersTurn()
+    } else {
+      this.cpusTurn()
+    }
+  } 
+},
+washBall: function(eventObject) { //USED BY EVENT LISTENERS
   playerBall.setAttribute("style", "opacity:1")          
   playerBall.setAttribute("value", "washed")  
-}
-const pClicksTarget = function(evtObj) {        
+},
+pClicksTarget: function(evtObj) { //USE BY EVENT LISTENERS
   if(evtObj.target.tagName === "DIV"){                          //listens only to cups not to blank space
     if(playerBall.getAttribute("value") === "unwashed") {       //TELLS YOU IF THE BALLS ARE DIRTY
       let text = document.querySelector("p")
@@ -26,34 +45,13 @@ const pClicksTarget = function(evtObj) {
     })
     }
   }
-}
-
-const beerPong = {
-  pHits: 0,
-  cHits: 0,
-  turnCounter: 1,
-  //THIS FUNCTION DETERMINES:
-  // -If the game should keep running
-  // -Who's turn is it Player (Odds) or Computer (evens)
-  whosTurn: function () {                               
-  if(this.pHits === 10){
-    text.innerHTML = "YOU WIN!!! The computer rebooted in a bush and now it's motherboard is fried!"
-  } else if (this.cHits ===10) {
-    text.innerHTML = "You lose. Better luck next time. Is that your phone at the bottom of the swimming pool?"
-  } else { 
-    if (this.turnCounter %2 !== 0) {
-    this.playersTurn()
-  } else {
-    this.cpusTurn()
-  }
-} 
 },
 // THIS FUNCTION DETERMINES WHAT THE BALL DOES (3 POSSIBLE OUTCOMES)
 ball: function (lowerCaseLetter, targetCupId) {
     let cBallOpacity = document.getElementById("cBall") //DIMS COMPUTER BALL                                          
     cBallOpacity.setAttribute("style", "opacity:0")   
-    playerWaterCup.removeEventListener("click", washBall)    //TURNS OFF EVENT LISTENER
-    cpuSideCups.removeEventListener("click", pClicksTarget)  //TURNS OFF EVENT LISTENER
+    playerWaterCup.removeEventListener("click", this.washBall)    //TURNS OFF EVENT LISTENER
+    cpuSideCups.removeEventListener("click", this.pClicksTarget)  //TURNS OFF EVENT LISTENER
     let hoverEffectsBall = document.getElementById("player-watercup").setAttribute("class", "watercup")  //REMOVES HOVER EFFECT
     for (let z = 1; z <=10; z++){                                   //REMOVES HOVER EFFECTS
       let getCup = document.getElementById(`p${z}`).setAttribute("class", "cup")
@@ -140,9 +138,9 @@ ball: function (lowerCaseLetter, targetCupId) {
     }
     // let playerBall = document.getElementById("pBall")
     // let playerWaterCup = document.getElementById("player-watercup")
-    playerWaterCup.addEventListener("click", washBall)    //LISTENS FOR CLICKS TO WASH THE BALL
+    playerWaterCup.addEventListener("click", this.washBall)    //LISTENS FOR CLICKS TO WASH THE BALL
     let playersTargetId = ""
-    cpuSideCups.addEventListener("click", pClicksTarget)  //LISTENS FOR CLICKS FOR THE TARGET )
+    cpuSideCups.addEventListener("click", this.pClicksTarget)  //LISTENS FOR CLICKS FOR THE TARGET )
     playerBall.setAttribute("value", "unwashed")          //BALL IS DIRTY AFTER USE
   },
 
