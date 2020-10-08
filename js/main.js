@@ -14,9 +14,9 @@ const beerPong = {
   // -Who's turn is it Player (Odds) or Computer (evens)
   whosTurn: function () {                               
     if(this.pHits === 10){
-      text.innerHTML = "YOU WIN!!! The computer rebooted in a bush and now it's motherboard is fried!"
+      text.innerHTML = "<span class='yellow'>YOU WIN!!!</span> The computer rebooted in a bush and now it's motherboard is fried!"
     } else if (this.cHits ===10) {
-      text.innerHTML = "You lose. Better luck next time. Is that your phone at the bottom of the swimming pool?"
+      text.innerHTML = "<span class='yellow'>YOU LOSE.</span> Better luck next time. Is that your phone at the bottom of the swimming pool?"
     } else { 
       if (this.turnCounter %2 !== 0) {
       this.playersTurn()
@@ -33,7 +33,7 @@ pClicksTarget: function(evtObj) { //USE BY EVENT LISTENERS
   if(evtObj.target.tagName === "DIV"){                          //listens only to cups not to blank space
     if(playerBall.getAttribute("value") === "unwashed") {       //TELLS YOU IF THE BALLS ARE DIRTY
       let text = document.querySelector("p")
-      text.innerHTML = "<span class='psa'>PUBLIC SERVICE ANNOUNCEMENT:</span> Don't forget to wash your balls." 
+      text.innerHTML = "<span class='yellow'>PUBLIC SERVICE ANNOUNCEMENT:</span> Don't forget to wash your balls." 
     } else if (playerBall.getAttribute("value") === "washed") { //ASSIGNS THE TARGET ID TO A VARIABLE
       playersTargetId = evtObj.target.getAttribute("id")
       console.log(playersTargetId)
