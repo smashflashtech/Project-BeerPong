@@ -1,8 +1,9 @@
 
 const aText = document.querySelector("p")
 console.log(aText)
-var delayInMilliseconds = 5000; //1 second
-
+let delayInMilliseconds = 5000;
+setTimeout(function() {
+}, delayInMilliseconds);
 
 
 const beerPong = {
@@ -11,18 +12,19 @@ const beerPong = {
   turnCounter: 1,
   whosTurn: function () {                               //CREATE A FUNCTION: There needes to be a function that decides who's turn it is
   if(this.pHits === 10){
-      aText.innerHTML = "YOU WIN!!! The computer rebooted in a bush and now it's motherboard is fried!"
-    } else if (this.cHits ===10) {
-      aText.innerHTML = "You lose. Better luck next time. Is that your phone at the bottom of the swimming pool?"
-    } else { //this conditional needs fixing//we dont need a conditional
-      if (this.turnCounter %2 !== 0) {                    //within the who's turn i should have a conditional that checks the hit score to determine whether or not to continue running
-        this.playersTurn()
-      } else {
-        this.cpusTurn()
-      }
-    } 
-  },
+    aText.innerHTML = "YOU WIN!!! The computer rebooted in a bush and now it's motherboard is fried!"
+  } else if (this.cHits ===10) {
+    aText.innerHTML = "You lose. Better luck next time. Is that your phone at the bottom of the swimming pool?"
+  } else { //this conditional needs fixing//we dont need a conditional
+    if (this.turnCounter %2 !== 0) {                    //within the who's turn i should have a conditional that checks the hit score to determine whether or not to continue running
+    this.playersTurn()
+  } else {
+    this.cpusTurn()
+  }
+} 
+},
   ballDoesWhat: function (lowerCaseLetter, targetCupId) {
+    this.turnCounter = this.turnCounter + 1                                                            
     let hitOrNoHit = Math.random()
 //    let aText = document.querySelector("p")
     //FIRST CONSEQUENCE - MISS
@@ -31,7 +33,10 @@ const beerPong = {
       
       // SECOND CONSEQUENCE - HIT                                             //nothing else happens, move on to the next turn
     } else if (hitOrNoHit >= .34 && hitOrNoHit <= .66) {
-      aText.innerHTML = "Check out that laser shot! It's a hit!"
+      aText.innerHTML = "Check out that laser shot! It's a hit!<span id='ok'>[CLICK OK]</span>" //come back here
+      document.getElementById("ok").addEventListener("click", function(evtObj) {
+      beerPong.whosTurn()
+      })
       let target = document.getElementById(targetCupId)                       //HIT targetCupID - it should grab the element with id = "lowerCaseLetter(targetCupID)" // the player will never select anything that is false..because i should have turned that event listener off, so what i should do is have the computer evaluation of value in the computers turn function
       target.setAttribute("style", "opacity:0")                                                            //Make the cup disappear
       target.setAttribute("value", "non-playable")                                                         //change its value to false
@@ -40,41 +45,42 @@ const beerPong = {
       } else if (lowerCaseLetter === "c") {
         this.cHits =this.cHits + 1
       }
-
-    //THIRD CONSEQUENCE - BOUNCE OFF AND HIT
+      
+      //THIRD CONSEQUENCE - BOUNCE OFF AND HIT
     } else if (hitOrNoHit >= .67 && hitOrNoHit <= 1 ) {
-          aText.innerHTML = "OoOo, it bounced off the target and sank into another cup!!" 
-          let targetOtherCup = ""
-          if(lowerCaseLetter === "p") {
-            const playerIdArray=["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10"] 
-              for (i = 0 ; i < playerIdArray.length; i++){
-                let checkValue = document.getElementById(playerIdArray[i]).getAttribute("value") 
-                  if(checkValue === "playable") {                             
-                    targetOtherCup = playerIdArray[i]
-                  }
-                }
-                console.log("logged a p-bounce-target" + targetOtherCup)                                                                  
-                let grabOtherCupHit = document.getElementById(targetOtherCup)                                    
-                grabOtherCupHit.setAttribute("value", "non-playable")
-                grabOtherCupHit.setAttribute("style", "opacity:0")                                                               
-                  this.pHits = this.pHits + 1                       
-          } else if(lowerCaseLetter === "c") {
-            const cpuIdArray=["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10"] 
-            for (i = 0 ; i < cpuIdArray.length; i++){
-              let checkValue = document.getElementById(cpuIdArray[i]).getAttribute("value") 
-              if(checkValue === "playable") {                             
-                targetOtherCup = cpuIdArray[i]
-              }
-            }
-            console.log("logged a c-bouce-target" + targetOtherCup)                                                                  
-            let grabOtherCupHit = document.getElementById(targetOtherCup)                                    
-            grabOtherCupHit.setAttribute("value", "non-playable")
-            grabOtherCupHit.setAttribute("style", "opacity:0")
-            this.cHits =this.cHits + 1                                       
+      let targetOtherCup = ""
+      if(lowerCaseLetter === "p") {
+        const playerIdArray=["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10"] 
+        for (i = 0 ; i < playerIdArray.length; i++){
+          let checkValue = document.getElementById(playerIdArray[i]).getAttribute("value") 
+          if(checkValue === "playable") {                             
+            targetOtherCup = playerIdArray[i]
           }
         }
-    this.turnCounter = this.turnCounter + 1                                                            
-    this.whosTurn()
+        console.log("logged a p-change-target: " + targetOtherCup)                                                                  
+        let grabOtherCupHit = document.getElementById(targetOtherCup)                                    
+        grabOtherCupHit.setAttribute("value", "non-playable")
+        grabOtherCupHit.setAttribute("style", "opacity:0")                                                               
+        this.pHits = this.pHits + 1                       
+      } else if(lowerCaseLetter === "c") {
+        const cpuIdArray=["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10"] 
+        for (i = 0 ; i < cpuIdArray.length; i++){
+          let checkValue = document.getElementById(cpuIdArray[i]).getAttribute("value") 
+          if(checkValue === "playable") {                             
+            targetOtherCup = cpuIdArray[i]
+          }
+        }
+        console.log("logged a c-change-target: " + targetOtherCup)                                                                  
+        let grabOtherCupHit = document.getElementById(targetOtherCup)                                    
+        grabOtherCupHit.setAttribute("value", "non-playable")
+        grabOtherCupHit.setAttribute("style", "opacity:0")
+        this.cHits =this.cHits + 1                                       
+      }
+    aText.innerHTML = "OoOo, it bounced off the target and sank into another cup!!<span id='ok'>[CLICK OK]</span>"
+    document.getElementById("ok").addEventListener("click", function(evtObj) {
+    beerPong.whosTurn()
+    })
+    }
   },
   playersTurn: function () { //UNFINISHED FUNCTION
     let changeCpuBallOpacity = document.getElementById("cBall")                                             // Dims computer Ball
@@ -92,30 +98,30 @@ const beerPong = {
         playerBall.setAttribute("value", "washed")  
       })
     let cpuSideCups = document.getElementById("cSide")//i need to add an event listener to click on any of the cups on the computer side but not the section part its in (so the partent)) Need to look at that lab about bluuets.
+    let playersChosenTargetId = ""
     //console.log(cpuSideCups)
-    const getPlayerTarget = function (evtObj) {
+    cpuSideCups.addEventListener("click", function(evtObj) {
       if(evtObj.target.tagName === "DIV"){
         if(playerBall.getAttribute("value") === "unwashed") {
           let aText = document.querySelector("p")
           aText.innerHTML = "PUBLIC SERVICE ANNOUNCEMENT: Don't forget to wash your balls." 
         } else if (playerBall.getAttribute("value") === "washed") {
-          let playersChosenTargetId = evtObj.target.getAttribute("id")
+          playersChosenTargetId = evtObj.target.getAttribute("id")
+          console.log(playersChosenTargetId)
+          aText.innerHTML = "Let's see what happens! <span id='ok'>CLICK OK</span>"
+          document.getElementById("ok").addEventListener("click", function(evtObj) {
           beerPong.ballDoesWhat("p", playersChosenTargetId)
+        })
         }
       }
-    }
-    cpuSideCups.addEventListener("click", getPlayerTarget)
-//    cpuSideCups.removeEventListener("click", getPlayerTarget)
+    })
   },
 
   cpusTurn: function () {
     let changePlayerBallOpacity = document.getElementById("pBall") //Dims player ball/your turn
         changePlayerBallOpacity.setAttribute("style", "opacity:0")
     let changeCpuBallOpacity = document.getElementById("cBall") // undims computer ball
-        changeCpuBallOpacity.setAttribute("style", "opacity:1")
-    aText.innerHTML = "The computer takes a shot! Let's see what happens!"
-    setTimeout(function() {
-    }, delayInMilliseconds);
+        changeCpuBallOpacity.setAttribute("style", "opacity:1")    
         //console.log(changeBallOpacity) //this worked
     for (let z = 1; z <=10; z++){ //This turns off player hover effects
     let getCup = document.getElementById(`p${z}`).setAttribute("class", "cup")
@@ -140,14 +146,19 @@ const beerPong = {
           }
       }
       console.log("computer initial choice: ", cpusChosenTargetId)
-      this.ballDoesWhat("c", cpusChosenTargetId)
+      aText.innerHTML = "The computer takes a shot! Let's see what happens! <span id='ok'>[CLICK OK]</span>"
+      document.getElementById("ok").addEventListener("click", function(evtObj) {
+        beerPong.ballDoesWhat("c", cpusChosenTargetId)
+      }) 
   },
 } //!!!!! dont comment out this one !!!!! this is the end of the object container
 
 //beerPong.ballDoesWhat("c", "c8")
 //beerPong.playersTurn()
 //beerPong.cpusTurn()
-beerPong.whosTurn()
+document.getElementById("start").addEventListener("click", function(eventObject){
+  beerPong.whosTurn()
+})
 //-----------------------------------------[SCRATCH PAD AREA]------------------------------------------------------------------------------------
 
   //         const options = [`${lowerCaseLetter}1`, `${lowerCaseLetter}2`, `${lowerCaseLetter}3`, `${lowerCaseLetter}4`, `${lowerCaseLetter}5`, `${lowerCaseLetter}6`, `${lowerCaseLetter}7`, `${lowerCaseLetter}8`, `${lowerCaseLetter}9`, `${lowerCaseLetter}10`]   //BOUNCES OFF CUP AND LANDS IN ANOTHER CUP, lets take out the last cup that comes up playable
@@ -170,6 +181,37 @@ beerPong.whosTurn()
   //             this.whosTurn()  
   //           }
   //         }
+
+
+//EVENT LISTENER SCRATCH
+
+// const getPlayerTarget = function (evtObj) {
+//   if(evtObj.target.tagName === "DIV"){
+//     if(playerBall.getAttribute("value") === "unwashed") {
+//       let aText = document.querySelector("p")
+//       aText.innerHTML = "PUBLIC SERVICE ANNOUNCEMENT: Don't forget to wash your balls." 
+//     } else if (playerBall.getAttribute("value") === "washed") {
+//       let playersChosenTargetId = evtObj.target.getAttribute("id")
+//       beerPong.ballDoesWhat("p", playersChosenTargetId)
+//     }
+//   }
+// }
+//    cpuSideCups.addEventListener("click", getPlayerTarget)
+//    cpuSideCups.removeEventListener("click", getPlayerTarget)
+
+
+
+//Empty OK button event listener
+
+// aText.innerHTML = "The computer takes a shot! Let's see what happens! <span id='ok'>[CLICK OK]</span>"
+// document.getElementById("ok").addEventListener("click", function(evtObj) {
+  
+// }) 
+//NOTES WITH JAMES
+// player clicks ok
+// whosTurn runs
+
+
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //[REMAINING TO DO STUFF]
 
