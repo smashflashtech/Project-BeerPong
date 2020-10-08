@@ -6,13 +6,13 @@ let changeYourTurnOpacity = document.getElementById("yTurn")
 let cpuSideCups = document.getElementById("cSide")
 //need to declare event listener function for balls up here
 //or within the object 
-const washBall = (eventObject) => { 
+const washBall = function(eventObject) { 
   playerBall.setAttribute("style", "opacity:1")          
   playerBall.setAttribute("value", "washed")  
 }
-const pClicksTarget = (evtObj) => {        
+const pClicksTarget = function(evtObj) {        
   if(evtObj.target.tagName === "DIV"){                          //listens only to cups not to blank space
-    if(playerBall.getAttribute("value") === "unwashed") {       //TELLS YO IF THE BALLS ARE DIRTY
+    if(playerBall.getAttribute("value") === "unwashed") {       //TELLS YOU IF THE BALLS ARE DIRTY
       let text = document.querySelector("p")
       text.innerHTML = "<span class='psa'>PUBLIC SERVICE ANNOUNCEMENT:</span> Don't forget to wash your balls." 
     } else if (playerBall.getAttribute("value") === "washed") { //ASSIGNS THE TARGET ID TO A VARIABLE
