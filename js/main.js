@@ -1,5 +1,8 @@
 
 const text = document.querySelector("p")
+//need to declare event listener function for balls up here
+//or within the object 
+
 
 const beerPong = {
   pHits: 0,
@@ -53,30 +56,42 @@ ball: function (lowerCaseLetter, targetCupId) {
       let targetOtherCup = ""
       if(lowerCaseLetter === "p") {  //THIS REASSIGNS THE TARGET CUP TO THE LAST ID IN THIS ARRAY THAT HAS AS VALUE OF PLAYABLE FOR THE PLAYER
         const playerIdArray=["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10"] 
-        for (i = 0 ; i < playerIdArray.length; i++){
-          let checkValue = document.getElementById(playerIdArray[i]).getAttribute("value") 
+        for (let i = 0; i < playerIdArray.length; i++) { //SHUFFLES THE ARRAY
+          let j = Math.floor(Math.random() * playerIdArray.length);  
+          let temp = playerIdArray[i]; 
+          playerIdArray[i] = playerIdArray[j];
+          playerIdArray[j] = temp;   
+        }
+        for (k = 0 ; k < playerIdArray.length; k++){  //THIS ASSIGNS THE LAST ELEMENT THAT IS "PLAYABLE" AS THE NEW TARGET (VARIABLE HOLDS THE ID)
+          let checkValue = document.getElementById(playerIdArray[k]).getAttribute("value") 
           if(checkValue === "playable") {                             
-            targetOtherCup = playerIdArray[i]
+            targetOtherCup = playerIdArray[k]
           }
         }
-        console.log("logged a p-change-target: " + targetOtherCup)      //THIS "REMOVES" THE CUP THAT WAS SELECTED AS A NEW TARGET                                                             
+        console.log("logged a p-change-target: " + targetOtherCup) // "REMOVES" NEW TARGET CUP AND CHANGES THAT DIV TI "NON-PLAYABLE"                                                          
         let grabOtherCupHit = document.getElementById(targetOtherCup)                                    
         grabOtherCupHit.setAttribute("value", "non-playable")
         grabOtherCupHit.setAttribute("style", "opacity:0")                                                               
-        this.pHits = this.pHits + 1                       
+        this.pHits = this.pHits + 1 //ADDS TO THE HIT COUNTER            
       } else if(lowerCaseLetter === "c") { //THIS REASSIGNS THE TARGET CUP TO THE LAST ID IN THIS ARRAY THAT HAS AS VALUE OF PLAYABLE FOR THE PLAYER
         const cpuIdArray=["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10"] 
-        for (i = 0 ; i < cpuIdArray.length; i++){
-          let checkValue = document.getElementById(cpuIdArray[i]).getAttribute("value") 
+        for (let i = 0; i < cpuIdArray.length; i++) {  //SHUFFLES THE ARRAY
+          let j = Math.floor(Math.random() * cpuIdArray.length);  
+          let temp = cpuIdArray[i]; 
+          cpuIdArray[i] = cpuIdArray[j];
+          cpuIdArray[j] = temp;   
+        }
+        for (k = 0 ; k < cpuIdArray.length; k++){//THIS ASSIGNS THE LAST ELEMENT THAT IS "PLAYABLE" AS THE NEW TARGET (VARIABLE HOLDS THE ID)
+          let checkValue = document.getElementById(cpuIdArray[k]).getAttribute("value") 
           if(checkValue === "playable") {                             
-            targetOtherCup = cpuIdArray[i]
+            targetOtherCup = cpuIdArray[k]
           }
         }
         console.log("logged a c-change-target: " + targetOtherCup)                                                                  
         let grabOtherCupHit = document.getElementById(targetOtherCup)                                    
-        grabOtherCupHit.setAttribute("value", "non-playable") //THIS "REMOVES THE CUP THAT WAS SELECTED AS A NEW TARGET
+        grabOtherCupHit.setAttribute("value", "non-playable") // "REMOVES" NEW TARGET CUP AND CHANGES THAT DIV TI "NON-PLAYABLE"    
         grabOtherCupHit.setAttribute("style", "opacity:0")
-        this.cHits =this.cHits + 1                                       
+        this.cHits =this.cHits + 1   //ADDS TO HIT COUNTER                                    
       }
     text.innerHTML = "OoOo, it bounced off the target and sank into another cup!!<span id='ok'>[CLICK OK]</span>"
     document.getElementById("ok").addEventListener("click", function(evtObj) {
@@ -122,22 +137,20 @@ ball: function (lowerCaseLetter, targetCupId) {
   },
 
   cpusTurn: function () {
-    // let pBallOpacity = document.getElementById("pBall")  //MAY NOT NEED THIS ANYMORE BC I ADDED IT TO PLAYERS TURN
-    //     pBallOpacity.setAttribute("style", "opacity:0")
     let cBallOpacity = document.getElementById("cBall")     // UNDIMS COMPUTER BALL
         cBallOpacity.setAttribute("style", "opacity:1")    
     for (let z = 1; z <=10; z++){                                   //REMOVES HOVER EFFECTS
     let getCup = document.getElementById(`p${z}`).setAttribute("class", "cup")
     }
     let hoverEffectsBall = document.getElementById("player-watercup").setAttribute("class", "watercup") 
-    const cpuOptions = ["c6", "c4", "c8", "c10", "c1", "c9", "c7", "c2", "c3", "c5"] //lets just gerry ring this
-    for (let i = 0; i < cpuOptions.length; i++) { //shuffle the array //this loops through the array and changes the value of each element index at least once. 
-      // let j = Math.floor(Math.random() * cpuOptions.length);   //this creates a random ratio between 0-1 and multiples that ratio by the array length, then rounds that product down--representing a value that is within the index range
-      // let temp = cpuOptions[i];                                //this is a temporary variable that contains the the value that was in the index that the current iterator is accessing
-      // cpuOptions[i] = cpuOptions[j];                            //this changes the current index that the iterator has access to the value that occupied index j
-      // cpuOptions[j] = temp;   
-//      console.log(cpuOptions)//this works
+    const cpuOptions = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10"] 
+    for (let i = 0; i < cpuOptions.length; i++) {                                       //SHUFFLES THE ARRAY
+      let j = Math.floor(Math.random() * cpuOptions.length);  
+      let temp = cpuOptions[i]; 
+      cpuOptions[i] = cpuOptions[j];
+      cpuOptions[j] = temp;   
     }
+    console.log(cpuOptions)//this works
     let cpuTargetId = ""
     for (let k = 0; k < cpuOptions.length; k++){  //LOOPS THROUGH THE ARRAY AND STORES LAST ELEMENT THAT WAS "PLAYABLE"
           let checkValue = document.getElementById(cpuOptions[k]).getAttribute("value")
@@ -146,7 +159,7 @@ ball: function (lowerCaseLetter, targetCupId) {
           }
       }
       console.log("computer initial choice: ", cpuTargetId)
-      text.innerHTML = "The computer takes a shot! Let's see what happens! <span id='ok'>[CLICK OK]</span>" //LISTENS FOR A CLICK
+      text.innerHTML = "The computer takes a shot!<BR>Let's see what happens! <BR><span id='ok'>[CLICK OK]</span>" //LISTENS FOR A CLICK
       document.getElementById("ok").addEventListener("click", function(evtObj) {                             //BEFORE RUNNING
         beerPong.ball("c", cpuTargetId)                                                                      //PARAMETERS THROUGH 
       })                                                                                                     //BALL DOES WHAT
