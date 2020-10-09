@@ -71,7 +71,13 @@ p {
   border: 2px solid snow;
   height: 40px;
   width: 40px;
+  /* opacity: 1;
+  transition: opacity 2s; WORK IN PROGRESS for opacity transition */
 }
+
+/* .cup .hidden {
+  opacity: 0;
+}WORK IN PROGRESS for opacity transition*/
 
 .pick:hover {
   background-color: firebrick;
@@ -116,13 +122,12 @@ p {
   font-size: 12px;
   font-weight: bold;
   color: rgb(165, 42, 42, 1);
-  margin: -16px 0px 0px -15px; /*opacity is set here*/
+  margin: -16px 0px 0px -15px; 
 }
 
 section.CPUSide-container {
   height: 160px; 
   width: 160px;
-  /* background-color: blue; */
 }
 
 section.cpu-water-placement{
@@ -140,11 +145,9 @@ section.player-water-placement {
 }
 
 section.playerSide-container {
-  /* display:flex;
-  justify-content: center; */
+
   height: 160px; 
   width: 160px;
-  /* background-color: chartreuse; */
 }
 
 
@@ -182,7 +185,3 @@ section.playerSide-container {
   display: flex;
   justify-content: center;
 }
-
-/* #p1 {
-  background-color:firebrick;
-}  tested to see if i manipulated by ID would it overwrite color-- it does */

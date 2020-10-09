@@ -17,10 +17,10 @@ const beerPong = {
     for(let i = 1; i <=10; i++){                     //SETS UP CUPS
       let pCups = document.getElementById(`p${i}`)
       pCups.setAttribute("value", "playable")
-      pCups.setAttribute("style", "opacity:1")
+      pCups.setAttribute("style", "opacity:1")                                                                                                                         //WORK IN PROGRESS: comment these out for opacity change test
       let cCups = document.getElementById(`c${i}`)
       cCups.setAttribute("value", "playable")
-      cCups.setAttribute("style", "opacity:1")
+      cCups.setAttribute("style", "opacity:1")                                                                                                                         //WORK IN PROGRESS: comment these out for opacity change test
     }
     text.innerHTML = "Ready to bounce some balls and grip a dip in some bubbly beverage?!<br><span id='start' class='instructions'>Wash your ball and take aim to see what happens. [START]</span>"
     document.getElementById("start").addEventListener("click", function(eventObject){  //LISTENS FOR CLICK TO START BUTTON
@@ -92,6 +92,7 @@ ball: function (lowerCaseLetter, targetCupId) {
       })
       let target = document.getElementById(targetCupId) //THIS CODES MAKES THE CUP DISAPPEAR                     
       target.setAttribute("style", "opacity:0")
+      // target.classList.add("hidden")                                                                                                                         //WORK IN PROGRESS: playing with opacity transitions
       target.setAttribute("value", "non-playable")
       if(lowerCaseLetter === "p") {                     //THIS DETERMINES WHICH HIT COUNTER GETS A POINT
         this.pHits = this.pHits + 1 
