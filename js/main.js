@@ -30,10 +30,10 @@ const beerPong = {
   whosTurn: function () {                               
     if(this.pHits === 10){
       text.innerHTML = "<span class='yellow'>YOU WIN!!!</span> The computer rebooted in a bush and now its motherboard is fried! <span id='nGame'>[NEW GAME]</span>"
-      document.getElementById("nGame").addEventListener("click", this.newGame.bind(this))
+      document.getElementById("nGame").addEventListener("click", beerPong.newGame)
     } else if (this.cHits ===10) {
       text.innerHTML = "<span class='yellow'>YOU LOSE.</span> Better luck next time. Is that your phone at the bottom of the swimming pool? <span id='nGame'>[NEW GAME]</span>"
-      document.getElementById("nGame").addEventListener("click", this.newGame.bind(this))
+      document.getElementById("nGame").addEventListener("click", beerPong.newGame)
     } else { 
       if (this.turnCounter %2 !== 0) {
       this.playersTurn()
