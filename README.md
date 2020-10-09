@@ -11,8 +11,7 @@ I was interested in creating a unique cheeky game with the potential for dynamic
 ![final-results-b](./final-result-b.png)
 
 ### User Stories & Wireframes
-The planning materials used to build this app.
-* On the users turn, the use must wash the ball before they select a target. If they don't wash the ball a reminder will pop up to let them know they must wash the ball first. Once a target is selected the user clicks a button to see what happens. The ball either misses, hits the cup they aimed for, or bounces off that cup and lands in another cup. On the computers turn, the user clicks to see what happens. The application automatically calculates the target, takes aim, and results in one of possible consequences of the ball. The first player, the use or the computer, to knock out all 10 cups on their opponents side wins! 
+On the users turn, the use must wash the ball before they select a target. If they don't wash the ball a reminder will pop up to let them know they must wash the ball first. Once a target is selected the user clicks a button to see what happens. The ball either misses, hits the cup they aimed for, or bounces off that cup and lands in another cup. On the computers turn, the user clicks to see what happens. The application automatically calculates the target, takes aim, and results in one of possible consequences of the ball. The first player, the use or the computer, to knock out all 10 cups on their opponents side wins! 
 
 ![wireframe 1](./beerpong-wirefram3.png)
 
@@ -34,3 +33,6 @@ The next step is to increase user engagement by adding a "bounce the ball" shot 
 Future iterations of this game will include reracking the cups when there are 6, 3, and 1 cup remaining in the rack. Reracking is a common feature of gameplay in real life, thus adding this feature will make this virtual game more realistic.
 
 Finally, animiation and styling will be developed to add dimension to the user experience. Text click prompts will be changed to styled buttongs. Cup transitions and ball animation will be added during gameplay. Finally, graphic arts can be added to make the objects more realistic and 3-dimensional. 
+
+### GitHub Link
+https://smashflashtech.github.io/Project-BeerPong/
