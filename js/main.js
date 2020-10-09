@@ -11,9 +11,9 @@ const beerPong = {
   turnCounter: 1,
   //THIS FUNCTION DETERMINES: (a) If the game should keep running AND (b) Who's turn is it Player (Odds) or Computer (evens)
   newGame: function(eventObject) {
-    this.pHits = 0
-    this.cHits = 0
-    this.turnCounter = 1
+    beerPong.pHits = 0
+    beerPong.cHits = 0
+    beerPong.turnCounter = 1
     for(let i = 1; i <=10; i++){                     //SETS UP CUPS
       let pCups = document.getElementById(`p${i}`)
       pCups.setAttribute("value", "playable")
@@ -30,10 +30,10 @@ const beerPong = {
   whosTurn: function () {                               
     if(this.pHits === 10){
       text.innerHTML = "<span class='yellow'>YOU WIN!!!</span> The computer rebooted in a bush and now its motherboard is fried! <span id='nGame'>[NEW GAME]</span>"
-      document.getElementById("nGame").addEventListener("click", this.newGame)
+      document.getElementById("nGame").addEventListener("click", this.newGame.bind(this))
     } else if (this.cHits ===10) {
       text.innerHTML = "<span class='yellow'>YOU LOSE.</span> Better luck next time. Is that your phone at the bottom of the swimming pool? <span id='nGame'>[NEW GAME]</span>"
-      document.getElementById("nGame").addEventListener("click", this.newGame)
+      document.getElementById("nGame").addEventListener("click", this.newGame.bind(this))
     } else { 
       if (this.turnCounter %2 !== 0) {
       this.playersTurn()
