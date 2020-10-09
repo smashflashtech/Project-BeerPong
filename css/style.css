@@ -71,13 +71,7 @@ p {
   border: 2px solid snow;
   height: 40px;
   width: 40px;
-  /* opacity: 1;
-  transition: opacity 2s; WORK IN PROGRESS for opacity transition */
 }
-
-/* .cup .hidden {
-  opacity: 0;
-}WORK IN PROGRESS for opacity transition*/
 
 .pick:hover {
   background-color: firebrick;
