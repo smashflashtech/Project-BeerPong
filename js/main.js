@@ -9,19 +9,21 @@ const beerPong = {
   pHits: 0,
   cHits: 0,
   turnCounter: 1,
-  //THIS FUNCTION DETERMINES:
-  // -If the game should keep running
-  // -Who's turn is it Player (Odds) or Computer (evens)
+  //THIS FUNCTION DETERMINES: (a) If the game should keep running AND (b) Who's turn is it Player (Odds) or Computer (evens)
   newGame: function(eventObject) {
     this.pHits = 0
     this.cHits = 0
     this.turnCounter = 1
-    for(let i = 1; i <=10; i++){
-      document.getElementById(`p${i}`).setAttribute("value", "playable")
-      document.getElementById(`c${i}`).setAttribute("value", "playable")
+    for(let i = 1; i <=10; i++){                     //SETS UP CUPS
+      let pCups = document.getElementById(`p${i}`)
+      pCups.setAttribute("value", "playable")
+      pCups.setAttribute("style", "opacity:1")
+      let cCups = document.getElementById(`c${i}`)
+      cCups.setAttribute("value", "playable")
+      cCups.setAttribute("style", "opacity:1")
     }
     text.innerHTML = "Ready to bounce some balls and grip a dip in some bubbly beverage?!<br><span id='start' class='instructions'>Wash your ball and take aim to see what happens. [START]</span>"
-    document.getElementById("start").addEventListener("click", function(eventObject){  //START BUTTON
+    document.getElementById("start").addEventListener("click", function(eventObject){  //LISTENS FOR CLICK TO START BUTTON
       beerPong.whosTurn()
     })
   },
@@ -45,7 +47,7 @@ washBall: function(eventObject) { //USED BY EVENT LISTENERS
   playerBall.setAttribute("value", "washed")  
 },
 pClicksTarget: function(evtObj) { //USE BY EVENT LISTENERS
-  if(evtObj.target.tagName === "DIV"){                          //listens only to cups not to blank space
+  if(evtObj.target.tagName === "DIV"){                          //listens only to clicks on cups(divs) not to blank spaces
     if(playerBall.getAttribute("value") === "unwashed") {       //TELLS YOU IF THE BALLS ARE DIRTY
       let text = document.querySelector("p")
       text.innerHTML = "<span class='yellow'>PUBLIC SERVICE ANNOUNCEMENT:</span> Don't forget to wash your balls." 
