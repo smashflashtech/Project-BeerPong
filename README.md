@@ -6,9 +6,9 @@ This is a game I built for General Assembly's Software Engineering Immersive's U
 I was interested in creating a unique cheeky game with the potential for dynamic user interactivity. Beerpong is a game that is easy to understand for novices, but also can stir up good memories in those seasoned veterans. Whether you're new to the game or not, you're likely to have a good time. 
 
 ### Screenshots
-![initial-result][./initial-result.png]
-![final-result-a][./final-result-a.png]
-![final-results-b][./final-result-b.png]
+![initial-result](./initial-result.png)
+![final-result-a](./final-result-a.png)
+![final-results-b](./final-result-b.png)
 ---
 ### User Stories & Wireframes
 The planning materials used to build this app.
@@ -22,9 +22,9 @@ The planning materials used to build this app.
 * CSS
 * Javascript
 
-![HTML][./beerpong-html-example.png]
-![CSS][./beerpong-css-example.png]
-![Javascript][./beerpong-javascript-example.png]
+![HTML](./beerpong-html-example.png)
+![CSS](./beerpong-css-example.png)
+![Javascript](./beerpong-javascript-example.png)
 
 ---
 ### Credits
