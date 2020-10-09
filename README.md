@@ -25,11 +25,8 @@ The planning materials used to build this app.
 ![CSS](./beerpong-css-example.png)
 ![Javascript](./beerpong-javascript-example.png)
 
----
 ### Credits
 Many kudos to the GA instructors and TAs for their unrelenting patience and assistance during pivotal moments of debugging. Thank you especially to James Sinkler and Brock Whitbred-Cole whose code I referenced several times (PokeASquare and events-practice, respectively) and Jacob Kleiman whose High-Card tutorial taught me more elegant and succinct ways of DOM manipulation. Finally, big thanks to my peers for the confident enthusiasm anticipating my finished product and ongoing encoragement.
-
----
 
 ### Future development
 The next step is to increase user engagement by adding a "bounce the ball" shot option (that can earn 2 cup removal). This adds user input and interaction in two ways: (1) the user can choose between two options when taking a shot (laser shot or bounce the ball) and (2) if and when the computer bounces the ball the user can provide input that may smack the ball out of the way, blocking the shot. Successfully bouncing a ball into the cups results in two cup removal from the opponents rack. This will add to the number possibilities within the game and potential outcomes--making the game more dynamic and potentially more interesting.

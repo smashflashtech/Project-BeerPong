@@ -230,10 +230,14 @@ beerPong.newGame()
 //6 - cup rerack - if either hit counter is at 4
 
 
-//STRETCH GOAL: Then we animate
-//      - focus on ball animation
-//      -could animate liquid in cups
+//STRETCH GOAL: 
+//Ball animation
+//  - can have balls in all cups and opacity changes with shots hit
+//Cup Aimation
+//  - animate liquid in cups
+//  - animate transition of cups
 //OTHER STUFF:
-//      -you can beautify
-//            - wood grain table
-//            - add ring marks when cups dim
+//beautify
+//   - wood grain table
+//   - add ring marks when cups dim
+//   - 3D graphics
