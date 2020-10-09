@@ -29,7 +29,7 @@ const beerPong = {
   },
   whosTurn: function () {                               
     if(this.pHits === 10){
-      text.innerHTML = "<span class='yellow'>YOU WIN!!!</span> The computer rebooted in a bush and now it's motherboard is fried! <span id='nGame'>[NEW GAME]</span>"
+      text.innerHTML = "<span class='yellow'>YOU WIN!!!</span> The computer rebooted in a bush and now its motherboard is fried! <span id='nGame'>[NEW GAME]</span>"
       document.getElementById("nGame").addEventListener("click", this.newGame)
     } else if (this.cHits ===10) {
       text.innerHTML = "<span class='yellow'>YOU LOSE.</span> Better luck next time. Is that your phone at the bottom of the swimming pool? <span id='nGame'>[NEW GAME]</span>"
@@ -196,80 +196,39 @@ beerPong.newGame()
 
 //-----------------------------------------[SCRATCH PAD AREA]------------------------------------------------------------------------------------
 
-  //         const options = [`${lowerCaseLetter}1`, `${lowerCaseLetter}2`, `${lowerCaseLetter}3`, `${lowerCaseLetter}4`, `${lowerCaseLetter}5`, `${lowerCaseLetter}6`, `${lowerCaseLetter}7`, `${lowerCaseLetter}8`, `${lowerCaseLetter}9`, `${lowerCaseLetter}10`]   //BOUNCES OFF CUP AND LANDS IN ANOTHER CUP, lets take out the last cup that comes up playable
-  //         for (i = 0 ; i < options.length; i++){
-  //           let checkValue = document.getElementById(options[i]).getAttribute("value")        
-  // //        console.log(checkValue)// this works
-  // //        console.log(options[i])// this works
-  //           if(checkValue === "playable") {                             
-  //             let targetOtherCup = options[i]                                                                   //this is going to store the ID of late element iterated through that was "playable"
-  //   //        console.log("this is the value:", targetOtherCup)this works
-  //             let grabOtherCupHit = document.getElementById(targetOtherCup)                                     //I need to grab this element by the id stored in targetOtherCup
-  //             grabOtherCupHit.setAttribute("value", "non-playable")
-  //             grabOtherCupHit.setAttribute("style", "opacity:0")
-  //             if(lowerCaseLetter === "p") {                                                                     //adds one to the hit counter.
-  //               this.pHits = this.pHits + 1 
-  //             } else if (lowerCaseLetter === "c") {
-  //               this.cHits =this.cHits +1
-  //             }                                       
-  //             this.turnCounter = this.turnCounter + 1                                                             //add one to the turncounter
-  //             this.whosTurn()  
-  //           }
-  //         }
 
-
-//EVENT LISTENER SCRATCH
-
-// const getPlayerTarget = function (evtObj) {
-//   if(evtObj.target.tagName === "DIV"){
-//     if(playerBall.getAttribute("value") === "unwashed") {
-//       let text = document.querySelector("p")
-//       text.innerHTML = "PUBLIC SERVICE ANNOUNCEMENT: Don't forget to wash your balls." 
-//     } else if (playerBall.getAttribute("value") === "washed") {
-//       let playersTargetId = evtObj.target.getAttribute("id")
-//       beerPong.ball("p", playersTargetId)
-//     }
-//   }
-// }
-//    cpuSideCups.addEventListener("click", getPlayerTarget)
-//    cpuSideCups.removeEventListener("click", getPlayerTarget)
-
-
-
-//Empty OK button event listener
-
-// text.innerHTML = "The computer takes a shot! Let's see what happens! <span id='ok'>[CLICK OK]</span>"
-// document.getElementById("ok").addEventListener("click", function(evtObj) {
-  
-// }) 
-//NOTES WITH JAMES
-// player clicks ok
-// whosTurn runs
-
-// playerWaterCup.removeEventListener("click", washBall)    //TURNS OFF EVENT LISTENER
-// cpuSideCups.removeEventListener("click", pClicksTarget)  //TURNS OFF EVENT LISTENER
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//[REMAINING TO DO STUFF]
+//[THINGS TO DO]
 
-//add New Game Button - maybe this is always present
-// CREATE A FUNCTION to 
-//  - set all opacities to 1 
-//  - set all values to true
-//  - set cpuHits to 0
-//  - set Player Hits to 0
-// 
+// could add an if conditional statement for hitNoHit - if theres only one cup left (e.g. if any counter is at 9, then hit or no hit is Math.random*.66 so that its always below .66 and bouncing of the cup and going into another cup isn't an option---it seems ok as the game proceeds this is less likely for both players)
+
+// Add bounce the ball option
+// COMPUTER CHOOSES BOUNCE BALL
+//   - add to computers turn a condition range that has .2 probability of bouncing and .8 probability of taking a regular shot 
+//      IF computer bounces:
+//        - Math.floor(Math.random() *5) - generates a number between 1 and 5
+//        - Ask to receive user input of a number between 1-5
+//            - write a conditional for if player number matches computers number then player smacks the ball out of the way
+//            - else run the bounce 
+//   - add option for player to choose bounce ball input (laser short OR bounce ball buttons)
+//   - create a function for bounced balls
+//       - generate a random number for hit or no hit (computer won't smack -- his connectivity is unstable)
+//       - set conditions .25 for probability for hit vs .75 probability for miss
+//       - if HIT: run bouncing loop that selects cup that runs 2 times      
+//       - else "better luck next time"
+
+//Add Reracks
+//      - since everything is by IDs i just need to make sure the IDs match up
+//      - maybe i'd have the cups already present but ...id have give these cups new numbers and make sure the functions run through arrays with these number but their opacity is set to 0
+//      -id have to make sure these are appropriately set up in new game (opacity 0)
+
+//Pull back and center 1 cup - if either hit count is at 9. if the counter is cHits then i would rerack cup, if it was pHits I would rereck pCup
+
+//3 - cup rerack - if either hit counter is at 7
+
+//6 - cup rerack - if either hit counter is at 4
 
 
-
-
-//THINGS TO DO
-//First we will target just for chance of targeting one cup at a time
-//THEN - if time permitting we will do a bounce option
-//     - then if time permitting we can consider adding a hit/miss option for bounces
-//then we can add re-racking
-//      -six cups
-//      -three-cups
-//      -one-cup
 //STRETCH GOAL: Then we animate
 //      - focus on ball animation
 //      -could animate liquid in cups
