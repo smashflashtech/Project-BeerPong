@@ -54,12 +54,12 @@ pClicksTarget: function(evtObj) { //USE BY EVENT LISTENERS
     } else if (playerBall.getAttribute("value") === "washed") { //ASSIGNS THE TARGET ID TO A VARIABLE
       playersTargetId = evtObj.target.getAttribute("id")
       console.log(playersTargetId)
-      text.innerHTML = "Let's see what happens! <span id='ok'>[CLICK OK]</span>" //RUNS BALL DOES WHAT
-      document.getElementById("ok").addEventListener("click", function(evtObj) {
+      //text.innerHTML = "Let's see what happens! <span id='ok'>[CLICK OK]</span>" //RUNS BALL DOES WHAT
+      //document.getElementById("ok").addEventListener("click", function(evtObj) {
       playerBall.setAttribute("style", "opacity:0") //working here
       changeYourTurnOpacity.setAttribute("style", "opacity:0")//working here
       beerPong.ball("p", playersTargetId)         //THE VARIABLE IS PASSED INTO THE BALL DOES WHAT FUNCTION
-    })
+    //})
     }
   }
 },
